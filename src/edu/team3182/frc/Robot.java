@@ -1,48 +1,34 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) FIRST 2008. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+/** 
+ *                     FRC Team 3182 Athena's Warriors
+ * 
+ * Our official code of complete awesomeness and control over the universe
+ * 
+ *
+ */
 
 package edu.team3182.frc;
 
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- */
+
 public class Robot extends IterativeRobot {
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
+    
+    //Called once when the robot is turned on
     public void robotInit() {
 
     }
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
+    //Called once when autonomous is triggered
+    public void autonomousInit() {
 
     }
 
-    /**
-     * This function is called periodically during operator control
-     */
+    //Called every 10 ms while in teleop
     public void teleopPeriodic() {
         
     }
     
-    /**
-     * This function is called periodically during test mode
-     */
+    //Called every 10 ms while in test mode
     public void testPeriodic() {
     
     }
