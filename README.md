@@ -1,2 +1,0 @@
-# FRC2015
-The 2015 code for FRC 3182
