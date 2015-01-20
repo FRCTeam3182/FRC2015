@@ -16,6 +16,7 @@ public class Robot3182 extends IterativeRobot {
 
     //Declaring thread variables
     private DriveTrain driveTrainVar;
+    private Sensors sensorsVar;
     
     //Declaring joystick variable
     private Joystick buttonsJoystick;
@@ -30,6 +31,8 @@ public class Robot3182 extends IterativeRobot {
         //Initialize the threads
         driveTrainVar = new DriveTrain();
         new Thread(driveTrainVar, "DriveTrain").start();
+        sensorsVar = new Sensors();
+        new Thread(sensorsVar, "Sensors").start();
     }
 
     /**

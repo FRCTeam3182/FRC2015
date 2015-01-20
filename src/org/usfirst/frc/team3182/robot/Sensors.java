@@ -4,9 +4,11 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 
 public class Sensors extends Object implements Runnable {
 
+	private BuiltInAccelerometer accel;
     private AnalogInput leftRangeFinder;
     private AnalogInput rightRangeFinder;
     private Encoder rightDriveEncoder;
@@ -23,6 +25,7 @@ public class Sensors extends Object implements Runnable {
         leftRangeFinder = new AnalogInput(1);
         rightRangeFinder = new AnalogInput(2);
         rightDriveEncoder.setDistancePerPulse(.08168);
+        accel = new BuiltInAccelerometer();
     }
 
     public void run() {
