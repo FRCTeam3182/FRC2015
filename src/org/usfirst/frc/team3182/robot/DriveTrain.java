@@ -1,10 +1,10 @@
-/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
- *                          The DriveTrain
- * 
- * This class is the thread for the drivetrain without shifters
- * 
- * 
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+ *                          The DriveTrain								*
+ * 																		*
+ * This class is the thread for the drivetrain without shifters			*
+ * 																		*
+ * 																		*
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 
 package org.usfirst.frc.team3182.robot;
 
