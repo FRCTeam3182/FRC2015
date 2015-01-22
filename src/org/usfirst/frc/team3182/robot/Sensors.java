@@ -45,6 +45,9 @@ public class Sensors extends Object implements Runnable {
             shootDistance = 0; 
             }
             SmartDashboard.putNumber("shootDistance Variable", shootDistance);
+            
+            //10ms delay
+            Timer.delay(.01);
         }
     }
     
