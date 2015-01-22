@@ -18,6 +18,7 @@ public class Robot3182 extends IterativeRobot {
     private DriveTrain driveTrainVar;
     private Sensors sensorsVar;
     private ArduinoLights arduinoLightsVar;
+    private Lifter lifterVar;
     
     //Declaring joystick variable
     private Joystick buttonsJoystick;
@@ -36,6 +37,9 @@ public class Robot3182 extends IterativeRobot {
         new Thread(sensorsVar, "Sensors").start();
         arduinoLightsVar = new ArduinoLights(sensorsVar);
         new Thread(arduinoLightsVar, "ArduinoLights").start();
+        lifterVar = new Lifter(sensorsVar);
+        new Thread(lifterVar, "Lifter").start();
+        
     }
 
     /**

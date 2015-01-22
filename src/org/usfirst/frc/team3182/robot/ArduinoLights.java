@@ -1,15 +1,16 @@
 /** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  * 						ArduinoLights
  * 
- * This class controls a strip of WS2812b addressable RGB LEDs. 
+ * This class controls a strip of WS2812b addressable RGB LEDs by 
+ * sending information to an ATMega via Serial. 
  * The animations on the strip are determined by the robot's actions
  * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 
 package org.usfirst.frc.team3182.robot;
 
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -23,12 +24,12 @@ public class ArduinoLights extends Object implements Runnable {
     //declare instances
     private DriverStation driverStation;
     private Sensors sensors;
-    private I2C arduino;
+    private SerialPort arduino;
     private Port port;
 
     public ArduinoLights(Sensors sensors) {
         //initializing everything
-        arduino = new I2C(port, 69); //I2C line for transmitting data
+        arduino = new SerialPort(9600, port); //I2C line for transmitting data
         driverStation = DriverStation.getInstance();
         this.sensors = sensors;
     }
@@ -40,7 +41,7 @@ public class ArduinoLights extends Object implements Runnable {
             distance = sensors.shootingDistance();
 
             //how to send stuff
-            arduino.write(69, 0b1);
+             
             
             //store old variables to be used later
             oldDistance = distance;

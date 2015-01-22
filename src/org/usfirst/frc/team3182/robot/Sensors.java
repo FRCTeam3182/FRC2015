@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.DigitalInput;
+
 
 public class Sensors extends Object implements Runnable {
 
@@ -12,6 +14,8 @@ public class Sensors extends Object implements Runnable {
     private AnalogInput ultrasonic;
     private Encoder rightDriveEncoder;
     private Encoder leftDriveEncoder;
+    private DigitalInput topLimit;
+    private DigitalInput bottomLimit;
     double leftVoltage;
     double rightVoltage;
     volatile int shootDistance;
@@ -24,6 +28,9 @@ public class Sensors extends Object implements Runnable {
         ultrasonic = new AnalogInput(1);
         rightDriveEncoder.setDistancePerPulse(.08168);
         accel = new BuiltInAccelerometer();
+        topLimit = new DigitalInput(0);
+        bottomLimit = new DigitalInput(1);
+        
     }
 
     public void run() {
