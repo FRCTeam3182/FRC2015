@@ -42,7 +42,7 @@ public class DriveTrain implements Runnable {
         
         //drivetrain
         drive = new RobotDrive(1, 2);
-        drive.setSafetyEnabled(false);
+        drive.setSafetyEnabled(false); // Disables the safety mode that turns the motors off after a certain time
         
         //Commands
         rightMotorCommand = 0;
