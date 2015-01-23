@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveTrain extends Object implements Runnable {
+public class DriveTrain implements Runnable {
 
     private final RobotDrive drive;
     private final DriverStation driverStation;
@@ -65,7 +65,7 @@ public class DriveTrain extends Object implements Runnable {
             }
             if (driverStation.isEnabled()) {
                 /*=================================================================
-                -Makes sure joystick will not work at ±P% throttle, P is declared above
+                -Makes sure joystick will not work at ï¿½P% throttle, P is declared above
                 -smoothVarRight/Left are output variables from a function
                 that calculates how much to power the motors
                 -Full throttle always outputs a 1 (full power)

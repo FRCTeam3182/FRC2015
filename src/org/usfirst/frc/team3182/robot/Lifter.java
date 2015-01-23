@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.DigitalInput;
 
-public class Lifter extends Object implements Runnable {
+public class Lifter implements Runnable {
 
 	//declare instances
 	private Sensors sensors;

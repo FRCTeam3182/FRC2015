@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 
-public class Sensors extends Object implements Runnable {
+public class Sensors implements Runnable {
 
 	private BuiltInAccelerometer accel;
     private AnalogInput ultrasonic;

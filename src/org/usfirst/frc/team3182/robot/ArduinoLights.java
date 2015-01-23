@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 
 
-public class ArduinoLights extends Object implements Runnable {
+public class ArduinoLights implements Runnable {
 
 	private boolean isAuto;
     private int oldDistance;
