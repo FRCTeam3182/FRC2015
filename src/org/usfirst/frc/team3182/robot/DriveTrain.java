@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain implements Runnable {
+<<<<<<< Updated upstream
 
     private final RobotDrive drive;
     private final DriverStation driverStation;
@@ -56,12 +57,55 @@ public class DriveTrain implements Runnable {
 
     public void run() {
 
+=======
+	
+	private final RobotDrive drive;
+	private final DriverStation driverStation;
+	
+	// Direct motor commands (start at unmoving)
+	private double rightFrontMotorCommand = 0;
+	private double rightBackMotorCommand = 0;
+	private double leftFrontMotorCommand = 0;
+	private double leftBackMotorCommand = 0;
+	
+	// General direction commands (start at unmoving)
+	private volatile double xCommand = 0; // 0 for unmoving, 1 for full strafe right, -1 for strafe left
+	private volatile double yCommand = 0; // 0 for unmoving, 1 for full forward, -1 for backward
+	private volatile double rotationCommand = 0; // 0 for unmoving, 1 for full clockwise, -1 counterclockwise
+	
+	// Joysticks
+	private final Joystick driveJoystick;
+	private volatile boolean joystickStateCommand; // false to disable joysticks
+	
+	// Deadzone and smoothing
+	private double ySmooth = 0; // for making joystick output a linear function between P and 1 and -P to -1
+	private double xSmooth = 0;
+	private double rotationSmooth = 0;
+	private final double P = 0.10; // dead zone of joysticks for drive is between -P and P
+	private final double rotationP = 10; // dead zone for the joystick's rotation (in degrees)
+	
+	public DriveTrain() {
+		
+		// Initializing everything
+		driverStation = DriverStation.getInstance();
+		
+		// Drivetrain
+		drive = new RobotDrive(1, 2);
+		drive.setSafetyEnabled(false);
+		
+		// Joystick
+		driveJoystick = new Joystick(1);
+	}
+	
+	public void run() {
+>>>>>>> Stashed changes
         while (true) {
             
-            //if joystickStateCommand is true, initialize all this stuff
+            // If joystickStateCommand is true, get the joystick values
             if (joystickStateCommand) {
-                rightMotorCommand = rightJoystick.getAxis(Joystick.AxisType.kY);
-                leftMotorCommand = leftJoystick.getAxis(Joystick.AxisType.kY);
+            	xCommand = driveJoystick.getAxis(Joystick.AxisType.kX); ////These values need to be checked//
+            	yCommand = driveJoystick.getAxis(Joystick.AxisType.kY); ////to see if they're what we want///
+            	rotationCommand = driveJoystick.getTwist(); 
             }
             if (driverStation.isEnabled()) {
                 /*=================================================================
@@ -73,59 +117,62 @@ public class DriveTrain implements Runnable {
                  =================================================================*/
                 
                 //Deadzone
-                if (rightMotorCommand < P && rightMotorCommand > (-P)) {
-                    smoothVarRight = 0;
+                if (yCommand < P && yCommand > (-P)) {
+                    ySmooth = 0;
                 }
-                if (leftMotorCommand < P && leftMotorCommand > (-P)) {
-                    smoothVarLeft = 0;
+                if (xCommand < P && xCommand > (-P)) {
+                    xSmooth = 0;
                 }
                 
                 //Smoothing
-                // yAxisLeft greater than P, which is pull back on the joystick
-                if (leftMotorCommand >= P) {
-                    smoothVarLeft = ((1 / (1 - P)) * leftMotorCommand + (1 - (1 / (1 - P))));
+                //If the x is positive and passed the deadzone (joystick is moved to the right)
+                if (xCommand >= P) {
+                    xSmooth = ((1 / (1 - P)) * xCommand + (1 - (1 / (1 - P))));
                 }
-                // yAxisLeft less than -P, which is push forward on the joystick 
-                if (leftMotorCommand <= (-P)) {
-                    smoothVarLeft = ((1 / (1 - P)) * leftMotorCommand - (1 - (1 / (1 - P))));
+                // If the x is negative and passed the deadzone (joystick is moved to the left) 
+                if (xCommand <= (-P)) {
+                    xSmooth = ((1 / (1 - P)) * xCommand - (1 - (1 / (1 - P))));
                 }
-                // yAxisRight greater than P, which is pull back on the joystick 
-                if (rightMotorCommand >= P) {
-                    smoothVarRight = ((1 / (1 - P)) * rightMotorCommand + (1 - (1 / (1 - P))));
+                // If the y is positive and passed the deadzone (joystick is moved to the up) 
+                if (yCommand >= P) {
+                    ySmooth = ((1 / (1 - P)) * yCommand + (1 - (1 / (1 - P))));
                 }
-                // yAxisLeft less than -P, which is push forward on the joystick 
-                if (rightMotorCommand <= (-P)) {
-                    smoothVarRight = ((1 / (1 - P)) * rightMotorCommand - (1 - (1 / (1 - P))));
+                // If the y is negative and passed the deadzone (joystick is moved to the down) 
+                if (yCommand <= (-P)) {
+                    ySmooth = ((1 / (1 - P)) * yCommand - (1 - (1 / (1 - P))));
+                }
+                // If the rotation is positive and passed the deadzone (joystick is twisted clockwise) 
+                if (rotationCommand >= rotationP) {
+                    rotationSmooth = ((1 / (1 - P)) * yCommand + (1 - (1 / (1 - P))));
+                }
+                // If the rotation is negative and passed the deadzone (joystick is twisted counterclockwise
+                if (yCommand <= rotationP) {
+                    rotationSmooth = ((1 / (1 - P)) * yCommand - (1 - (1 / (1 - P))));
                 }
                 
-                //drive using the joysticks
-                drive.tankDrive(-smoothVarLeft, -smoothVarRight);
+                // Drive ///////////needs solidifying//////////
+                // First possibility
+                drive.mecanumDrive_Cartesian(xSmooth, ySmooth, rotationSmooth, 0);
+                
+                // Second possibility
+                //    WRITE CUSTOM ARCADE MECANUM CODE HERE
             }
             driveToDashboard();
             Timer.delay(.1); //10ms delay
         }
     }
-
-    
-    public synchronized void setJoystickStateCommand(boolean joystickStateCommand) {
-        this.joystickStateCommand = joystickStateCommand;
-    }
-
-    public synchronized void setRightMotorCommand(double rightMotorCommand) {
-        this.rightMotorCommand = rightMotorCommand;
-    }
-
-    public synchronized void setLeftMotorCommand(double leftMotorCommand) {
-        this.leftMotorCommand = leftMotorCommand;
-    }
-
-   
-
-    private void driveToDashboard() {
-        SmartDashboard.putNumber("leftMotorCommand", leftMotorCommand);
-        SmartDashboard.putNumber("rightMotorCommand", rightMotorCommand);
-        SmartDashboard.putNumber("Smooth Var Left", smoothVarLeft);
-        SmartDashboard.putNumber("Smooth Var Right", smoothVarRight);
-        SmartDashboard.putBoolean("Joystick state", joystickStateCommand);
-    }
+	
+	public synchronized void setJoystickStateCommand(boolean joystickStateCommand) {
+		this.joystickStateCommand = joystickStateCommand;
+	}
+	
+	private void driveToDashboard() {
+		SmartDashboard.putNumber("Raw x Axis", xCommand);
+		SmartDashboard.putNumber("Raw y Axis", yCommand);
+		SmartDashboard.putNumber("Raw rotation", rotationCommand);
+		SmartDashboard.putNumber("Smooth Var x Axis", xSmooth);
+		SmartDashboard.putNumber("Smooth Var y Axis", ySmooth);
+		SmartDashboard.putNumber("Smooth Var rotation", rotationSmooth);
+		SmartDashboard.putBoolean("Joystick state", joystickStateCommand);
+	}
 }
