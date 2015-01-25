@@ -4,6 +4,8 @@
 *.iws
 .idea/
 
+.gradle/
+
 # Java
 bin
 
@@ -18,3 +20,7 @@ target/
 *.class
 dependency-reduced-pom.xml
 META-INF/application.xml
+*.gradle
+gradlew.bat
+gradlew.sh
+gradle/
