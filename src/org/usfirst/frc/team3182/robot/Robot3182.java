@@ -47,7 +47,7 @@ public class Robot3182 extends IterativeRobot {
      */
     @Override
     public void autonomousInit() {
-
+    	
     }
 
     /**
