@@ -47,7 +47,7 @@ public class DriveTrain implements Runnable {
 		driverStation = DriverStation.getInstance();
 
 		// Drivetrain
-		drive = new RobotDrive(1, 2);
+		drive = new RobotDrive(1, 2, 3, 4);
 		drive.setSafetyEnabled(false);
 
 		// Joystick
@@ -121,6 +121,8 @@ public class DriveTrain implements Runnable {
 	public synchronized void setJoystickStateCommand(boolean joystickStateCommand) {
 		this.joystickStateCommand = joystickStateCommand;
 	}
+
+
 
 	private void driveToDashboard() {
 		SmartDashboard.putNumber("Raw x Axis", xCommand);
