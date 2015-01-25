@@ -15,50 +15,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain implements Runnable {
-<<<<<<< Updated upstream
 
-    private final RobotDrive drive;
-    private final DriverStation driverStation;
-    
-    //Commands
-    private volatile double rightMotorCommand;
-    private volatile double leftMotorCommand;
-    boolean forwardCommand;
-    boolean backwardCommand;
-    
-    //Joysticks
-    private final Joystick rightJoystick;
-    private final Joystick leftJoystick;
-    private volatile boolean joystickStateCommand;
-    
-    //Deadzone and smoothing
-    private double smoothVarRight = 0; //for making joysticks linear function between of zero to 1
-    private double smoothVarLeft = 0;
-    private final double P = 0.10; //dead zone of joysticks for drive is between -P and P
-
-    public DriveTrain() {
-        //initializing everything
-        
-        driverStation = DriverStation.getInstance();
-        
-        //drivetrain
-        drive = new RobotDrive(1, 2);
-        drive.setSafetyEnabled(false); // Disables the safety mode that turns the motors off after a certain time
-        
-        //Commands
-        rightMotorCommand = 0;
-        leftMotorCommand = 0;
-        joystickStateCommand = false;    
-        
-        //Joystick
-        rightJoystick = new Joystick(1);
-        leftJoystick = new Joystick(2);
-    }
-
-    public void run() {
-
-=======
-	
 	private final RobotDrive drive;
 	private final DriverStation driverStation;
 	
@@ -98,7 +55,6 @@ public class DriveTrain implements Runnable {
 	}
 	
 	public void run() {
->>>>>>> Stashed changes
         while (true) {
             
             // If joystickStateCommand is true, get the joystick values
