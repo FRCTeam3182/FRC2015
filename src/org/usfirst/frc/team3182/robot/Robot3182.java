@@ -8,11 +8,12 @@
 package org.usfirst.frc.team3182.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.tables.ITable;
 import org.usfirst.frc.team3182.robot.auto.AutoPossibilityInterface;
-import org.usfirst.frc.team3182.robot.auto.DriverForwardPoss;
+import org.usfirst.frc.team3182.robot.auto.DriveForwardPoss;
 
 import java.util.ArrayList;
 
@@ -28,10 +29,8 @@ public class Robot3182 extends IterativeRobot {
     private Joystick buttonsJoystick;
 
     //Declaring dashboard variable
-    public SmartDashboard dash;
+    public static SendableChooser table = new SendableChooser();
 
-    // List of auto possibilities
-    public static ArrayList<Class<? extends AutoPossibilityInterface>> possibilityClasses = new ArrayList<Class<? extends AutoPossibilityInterface>>();
 
     /**
      * Called once when the robot is turned on
@@ -55,9 +54,15 @@ public class Robot3182 extends IterativeRobot {
      * and builds the SmartDashboard dropdown
      */
     public static void listOfPossibilities(){
-        possibilityClasses.add(DriverForwardPoss.class);
+        DriveForwardPoss driveForwardPoss = new DriveForwardPoss();
+        table.addDefault(driveForwardPoss.getName(), driveForwardPoss);
 
-        
+
+        SmartDashboard.putData("Autonomous Mode Chooser", table);
+
+
+
+
     }
 
     /**
@@ -65,22 +70,8 @@ public class Robot3182 extends IterativeRobot {
      */
     @Override
     public void autonomousInit() {
-        String test = "Driver Forward Possibility";
-        AutoPossibilityInterface possibility = null;
-        for (Class<? extends AutoPossibilityInterface> i : possibilityClasses){
-            try {
-                if (i.newInstance().getName().equalsIgnoreCase(test)){
-                    possibility = i.newInstance();
-                }
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-        if (possibility == null){
-            return;
-        }
+        AutoPossibilityInterface possibility;
+        possibility = (AutoPossibilityInterface) table.getSelected();
         possibility.executePossibility(sensorsVar, lifterVar, driveTrainVar);
 
     }

@@ -4,7 +4,7 @@ import org.usfirst.frc.team3182.robot.DriveTrain;
 import org.usfirst.frc.team3182.robot.Lifter;
 import org.usfirst.frc.team3182.robot.Sensors;
 
-public class DriverForwardPoss implements AutoPossibilityInterface {
+public class DriveForwardPoss implements AutoPossibilityInterface {
 
     @Override
     public String getName() {
@@ -13,6 +13,6 @@ public class DriverForwardPoss implements AutoPossibilityInterface {
 
     @Override
     public void executePossibility(Sensors sensors, Lifter lifter, DriveTrain driverTrain) {
-
+            
     }
 }
