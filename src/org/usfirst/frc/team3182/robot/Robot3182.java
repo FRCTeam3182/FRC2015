@@ -30,7 +30,7 @@ public class Robot3182 extends IterativeRobot {
     //Declaring dashboard variable
     public SmartDashboard dash;
 
-
+    // List of auto possibilities
     public static ArrayList<Class<? extends AutoPossibilityInterface>> possibilityClasses = new ArrayList<Class<? extends AutoPossibilityInterface>>();
 
     /**
@@ -50,6 +50,10 @@ public class Robot3182 extends IterativeRobot {
         
     }
 
+    /**
+     * This adds all the possibility classes to the array list
+     * and builds the SmartDashboard dropdown
+     */
     public static void listOfPossibilities(){
         possibilityClasses.add(DriverForwardPoss.class);
 
