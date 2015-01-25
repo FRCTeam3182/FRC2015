@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain implements Runnable {
 
-	private final RobotDrive drive;
+
 	private final DriverStation driverStation;
 
 	// Direct motor commands (start at unmoving)
@@ -47,8 +47,7 @@ public class DriveTrain implements Runnable {
 		driverStation = DriverStation.getInstance();
 
 		// Drivetrain
-		drive = new RobotDrive(1, 2, 3, 4);
-		drive.setSafetyEnabled(false);
+
 
 		// Joystick
 		driveJoystick = new Joystick(1);
@@ -108,7 +107,7 @@ public class DriveTrain implements Runnable {
 
                 // Drive ///////////needs solidifying//////////
                 // First possibility
-                drive.mecanumDrive_Cartesian(xSmooth, ySmooth, rotationSmooth, 0);
+               //
 
                 // Second possibility
                 //    WRITE CUSTOM ARCADE MECANUM CODE HERE
