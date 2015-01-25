@@ -45,6 +45,7 @@ public class Robot3182 extends IterativeRobot {
     /**
      * Called once when autonomous is triggered
      */
+    @Override
     public void autonomousInit() {
 
     }
@@ -52,6 +53,7 @@ public class Robot3182 extends IterativeRobot {
     /**
      * Called every 10ms while in teleop
      */
+    @Override
     public void teleopPeriodic() {
 
     }
@@ -59,6 +61,7 @@ public class Robot3182 extends IterativeRobot {
     /**
      * Called every 10ms while in test mode
      */
+    @Override
     public void testPeriodic() {
 
     }

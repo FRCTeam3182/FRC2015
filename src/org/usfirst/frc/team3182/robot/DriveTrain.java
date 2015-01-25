@@ -18,50 +18,50 @@ public class DriveTrain implements Runnable {
 
 	private final RobotDrive drive;
 	private final DriverStation driverStation;
-	
+
 	// Direct motor commands (start at unmoving)
-	private double rightFrontMotorCommand = 0;
-	private double rightBackMotorCommand = 0;
-	private double leftFrontMotorCommand = 0;
-	private double leftBackMotorCommand = 0;
-	
+//	private double rightFrontMotorCommand = 0;
+//	private double rightBackMotorCommand = 0;
+//	private double leftFrontMotorCommand = 0;
+//	private double leftBackMotorCommand = 0;
+
 	// General direction commands (start at unmoving)
 	private volatile double xCommand = 0; // 0 for unmoving, 1 for full strafe right, -1 for strafe left
 	private volatile double yCommand = 0; // 0 for unmoving, 1 for full forward, -1 for backward
 	private volatile double rotationCommand = 0; // 0 for unmoving, 1 for full clockwise, -1 counterclockwise
-	
+
 	// Joysticks
 	private final Joystick driveJoystick;
 	private volatile boolean joystickStateCommand; // false to disable joysticks
-	
+
 	// Deadzone and smoothing
 	private double ySmooth = 0; // for making joystick output a linear function between P and 1 and -P to -1
 	private double xSmooth = 0;
 	private double rotationSmooth = 0;
 	private final double P = 0.10; // dead zone of joysticks for drive is between -P and P
 	private final double rotationP = 10; // dead zone for the joystick's rotation (in degrees)
-	
+
 	public DriveTrain() {
-		
+
 		// Initializing everything
 		driverStation = DriverStation.getInstance();
-		
+
 		// Drivetrain
 		drive = new RobotDrive(1, 2);
 		drive.setSafetyEnabled(false);
-		
+
 		// Joystick
 		driveJoystick = new Joystick(1);
 	}
-	
+
 	public void run() {
         while (true) {
-            
+
             // If joystickStateCommand is true, get the joystick values
             if (joystickStateCommand) {
             	xCommand = driveJoystick.getAxis(Joystick.AxisType.kX); ////These values need to be checked//
             	yCommand = driveJoystick.getAxis(Joystick.AxisType.kY); ////to see if they're what we want///
-            	rotationCommand = driveJoystick.getTwist(); 
+            	rotationCommand = driveJoystick.getTwist();
             }
             if (driverStation.isEnabled()) {
                 /*=================================================================
@@ -71,7 +71,7 @@ public class DriveTrain implements Runnable {
                 -Full throttle always outputs a 1 (full power)
                 -While joystick is in deadzone, a 0 is outputted
                  =================================================================*/
-                
+
                 //Deadzone
                 if (yCommand < P && yCommand > (-P)) {
                     ySmooth = 0;
@@ -79,7 +79,7 @@ public class DriveTrain implements Runnable {
                 if (xCommand < P && xCommand > (-P)) {
                     xSmooth = 0;
                 }
-                
+
                 //Smoothing
                 //If the x is positive and passed the deadzone (joystick is moved to the right)
                 if (xCommand >= P) {
@@ -105,11 +105,11 @@ public class DriveTrain implements Runnable {
                 if (yCommand <= rotationP) {
                     rotationSmooth = ((1 / (1 - P)) * yCommand - (1 - (1 / (1 - P))));
                 }
-                
+
                 // Drive ///////////needs solidifying//////////
                 // First possibility
                 drive.mecanumDrive_Cartesian(xSmooth, ySmooth, rotationSmooth, 0);
-                
+
                 // Second possibility
                 //    WRITE CUSTOM ARCADE MECANUM CODE HERE
             }
@@ -117,11 +117,11 @@ public class DriveTrain implements Runnable {
             Timer.delay(.1); //10ms delay
         }
     }
-	
+
 	public synchronized void setJoystickStateCommand(boolean joystickStateCommand) {
 		this.joystickStateCommand = joystickStateCommand;
 	}
-	
+
 	private void driveToDashboard() {
 		SmartDashboard.putNumber("Raw x Axis", xCommand);
 		SmartDashboard.putNumber("Raw y Axis", yCommand);
