@@ -61,7 +61,6 @@ public class Robot3182 extends IterativeRobot {
      */
     @Override
     public void autonomousInit() {
-<<<<<<< HEAD
         String test = "Driver Forward Possibility";
         AutoPossibilityInterface possibility = null;
         for (Class<? extends AutoPossibilityInterface> i : possibilityClasses){
@@ -80,9 +79,6 @@ public class Robot3182 extends IterativeRobot {
         }
         possibility.executePossibility(sensorsVar, lifterVar, driveTrainVar);
 
-=======
-    	
->>>>>>> b25b1f1c4af072462c6600cd1a5938a905a40310
     }
 
     /**
