@@ -56,13 +56,8 @@ public class Robot3182 extends IterativeRobot {
     public static void listOfPossibilities(){
         DriveForwardPoss driveForwardPoss = new DriveForwardPoss();
         table.addDefault(driveForwardPoss.getName(), driveForwardPoss);
-
-
+       // table.addObject(
         SmartDashboard.putData("Autonomous Mode Chooser", table);
-
-
-
-
     }
 
     /**

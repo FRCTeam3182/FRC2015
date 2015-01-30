@@ -15,13 +15,14 @@ public class Lifter implements Runnable {
 
 	//declare instances
 	private Sensors sensors;
-	private Talon winch;
+	private Talon rightMotor;
+	private Talon leftMotor;
 	private Relay lock;
-	
 	
 	public Lifter(Sensors sensors){
 		
-		winch = new Talon(3);
+		rightMotor = new Talon(3);
+		leftMotor = new Talon(4);
 		this.sensors = sensors;
 	}
 	
