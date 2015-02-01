@@ -6,17 +6,17 @@ import org.usfirst.frc.team3182.robot.Robot3182;
 import org.usfirst.frc.team3182.robot.Sensors;
 import org.usfirst.frc.team3182.robot.util.DriverUtil;
 
-public class DriveForwardPoss implements AutoPossibilityInterface {
-
+public class PushTotePoss implements AutoPossibilityInterface{
 
     @Override
     public String getName() {
-        return "Driver Forward Possibility";
+        return "Push into Tote Possibility";
     }
 
     @Override
     public void executePossibility(Sensors sensors, Lifter lifter, DriveTrain driverTrain) {
         DriverUtil du = Robot3182.getDriverUtil();
-        du.moveDriveTrainDistance(0, 5);
+        du.moveDriveTrainDistance(0, 10);
+
     }
 }

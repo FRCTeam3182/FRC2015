@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.tables.ITable;
 import org.usfirst.frc.team3182.robot.auto.AutoPossibilityInterface;
 import org.usfirst.frc.team3182.robot.auto.DriveForwardPoss;
+import org.usfirst.frc.team3182.robot.auto.PushTotePoss;
+import org.usfirst.frc.team3182.robot.util.DriverUtil;
 
 import java.util.ArrayList;
 
@@ -31,6 +33,8 @@ public class Robot3182 extends IterativeRobot {
     //Declaring dashboard variable
     public static SendableChooser table = new SendableChooser();
 
+    public static DriverUtil du;
+
 
     /**
      * Called once when the robot is turned on
@@ -46,6 +50,8 @@ public class Robot3182 extends IterativeRobot {
         new Thread(arduinoLightsVar, "ArduinoLights").start();
         lifterVar = new Lifter(sensorsVar);
         new Thread(lifterVar, "Lifter").start();
+
+        du = new DriverUtil();
         
     }
 
@@ -56,7 +62,10 @@ public class Robot3182 extends IterativeRobot {
     public static void listOfPossibilities(){
         DriveForwardPoss driveForwardPoss = new DriveForwardPoss();
         table.addDefault(driveForwardPoss.getName(), driveForwardPoss);
-       // table.addObject(
+
+        PushTotePoss pushTotePoss = new PushTotePoss();
+        table.addObject(pushTotePoss.getName(), pushTotePoss);
+
         SmartDashboard.putData("Autonomous Mode Chooser", table);
     }
 
@@ -86,5 +95,10 @@ public class Robot3182 extends IterativeRobot {
     public void testPeriodic() {
 
     }
+
+    public static DriverUtil getDriverUtil(){
+        return du;
+    }
+
 
 }
