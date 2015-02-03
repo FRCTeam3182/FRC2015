@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.tables.ITable;
 import org.usfirst.frc.team3182.robot.auto.AutoPossibilityInterface;
 import org.usfirst.frc.team3182.robot.auto.DriveForwardPoss;
+import org.usfirst.frc.team3182.robot.auto.PushBinPoss;
 import org.usfirst.frc.team3182.robot.auto.PushTotePoss;
 import org.usfirst.frc.team3182.robot.util.DriverUtil;
 import org.usfirst.frc.team3182.robot.util.LifterUtil;
@@ -71,6 +72,9 @@ public class Robot3182 extends IterativeRobot {
 
         PushTotePoss pushTotePoss = new PushTotePoss();
         table.addObject(pushTotePoss.getName(), pushTotePoss);
+
+        PushBinPoss pushBinPoss = new PushBinPoss();
+        table.addObject(pushBinPoss.getName(), pushBinPoss);
 
         SmartDashboard.putData("Autonomous Mode Chooser", table);
     }

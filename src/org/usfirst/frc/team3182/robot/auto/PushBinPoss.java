@@ -7,11 +7,11 @@ import org.usfirst.frc.team3182.robot.Sensors;
 import org.usfirst.frc.team3182.robot.util.DriverUtil;
 import org.usfirst.frc.team3182.robot.util.LifterUtil;
 
-public class PushTotePoss implements AutoPossibilityInterface{
-
+public class PushBinPoss implements AutoPossibilityInterface
+{
     @Override
     public String getName() {
-        return "Push tote into auto possibility";
+        return "Push Bin into Auto Possibility";
     }
 
     @Override
@@ -20,9 +20,8 @@ public class PushTotePoss implements AutoPossibilityInterface{
         LifterUtil lu = Robot3182.getLifterUtil();
         du.moveDriveTrainDistance(0, 2);
         lu.resetLifter();
-        lu.setLifter(5); //TODO Set correct height for tote
+        lu.setLifter(7); //TODO Change to correct measurements
         du.moveDriveTrainDistance(0, 10);
         lu.resetLifter();
-
     }
 }
