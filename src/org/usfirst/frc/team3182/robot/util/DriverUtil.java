@@ -22,13 +22,13 @@ public class DriverUtil {
      */
     
     public DriverUtil(){
-        drive = new RobotDrive(1, 2, 3, 4);
+        drive = new RobotDrive(0, 1, 2, 3); // TODO Check the motor direction
         drive.setSafetyEnabled(false);
         
         encoders.set(0, new Encoder(1,2));
         encoders.set(1, new Encoder(3,4));
         encoders.set(2, new Encoder(5,6));
-        encoders.set(3, new Encoder(7,8));
+        encoders.set(3, new Encoder(7,8)); // TODO Check all these ports
 
     }
 
@@ -44,7 +44,7 @@ public class DriverUtil {
     {
      //Moves the robot in an arbitrary distance unit, determined by the encoder's output
     	//double oldDistance = 0.00;
-        distX = distY * 1;
+        distX = distX * 1;
         distY = distY * 1; // TODO Change to correct values
         double xyRatio = distX/(distY+distX);
         double yxRatio = distY/(distY+distX);

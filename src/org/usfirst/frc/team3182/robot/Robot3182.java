@@ -16,6 +16,7 @@ import org.usfirst.frc.team3182.robot.auto.AutoPossibilityInterface;
 import org.usfirst.frc.team3182.robot.auto.DriveForwardPoss;
 import org.usfirst.frc.team3182.robot.auto.PushTotePoss;
 import org.usfirst.frc.team3182.robot.util.DriverUtil;
+import org.usfirst.frc.team3182.robot.util.LifterUtil;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,8 @@ public class Robot3182 extends IterativeRobot {
     //Declaring dashboard variable
     public static SendableChooser table = new SendableChooser();
 
-    public static DriverUtil du;
+    private static DriverUtil du;
+    private static LifterUtil lu;
 
 
     /**
@@ -52,6 +54,10 @@ public class Robot3182 extends IterativeRobot {
         new Thread(lifterVar, "Lifter").start();
 
         du = new DriverUtil();
+
+        lu = new LifterUtil();
+
+
         
     }
 
@@ -89,16 +95,18 @@ public class Robot3182 extends IterativeRobot {
     }
 
     /**
-     * Called every 10ms while in test mode
+     * Called when test mode is activated
      */
     @Override
-    public void testPeriodic() {
-
+    public void testInit() {
+        lu.resetLifter(); // Resets the lifter to the ready position
     }
 
     public static DriverUtil getDriverUtil(){
         return du;
     }
 
-
+    public static LifterUtil getLifterUtil() {
+        return lu;
+    }
 }

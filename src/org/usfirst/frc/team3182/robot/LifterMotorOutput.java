@@ -2,7 +2,7 @@ package org.usfirst.frc.team3182.robot;
 
 import edu.wpi.first.wpilibj.SpeedController;
 
-public class LifterMotorOutput implements SpeedController{
+public class LifterMotorOutput implements SpeedController {
 
 	private double speed;
 	
