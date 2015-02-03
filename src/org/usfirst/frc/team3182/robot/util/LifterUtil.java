@@ -15,7 +15,7 @@ public class LifterUtil {
 
     public LifterUtil(){
         talons.add(0, new Talon(4));
-        talons.add(0, new Talon(5));
+        talons.add(1, new Talon(5));
 
         encoders.set(0, new Encoder(9,10));
         encoders.set(1, new Encoder(11,12));
