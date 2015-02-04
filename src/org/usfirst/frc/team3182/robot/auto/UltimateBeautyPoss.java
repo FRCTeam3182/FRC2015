@@ -16,8 +16,8 @@ public class UltimateBeautyPoss implements AutoPossibilityInterface {
 
     @Override
     public void executePossibility(Sensors sensors, Lifter lifter, DriveTrain driverTrain) { //TODO Change to correct values
-        DriverUtil du = Robot3182.getDriverUtil();
-        LifterUtil lu = Robot3182.getLifterUtil();
+        DriverUtil du = DriveTrain.getDriverUtil();
+        LifterUtil lu = Lifter.getLifterUtil();
         lu.resetLifter();
         du.moveDriveTrainDistance(0, 2); // Move drive train to tote
         lu.setLifter(5); // Pick up first tote

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3182.robot.util.DriverUtil;
 
 public class DriveTrain implements Runnable {
 
@@ -40,6 +41,8 @@ public class DriveTrain implements Runnable {
 	private final double P = 0.10; // dead zone of joysticks for drive is between -P and P
 	private final double rotationP = 10; // dead zone for the joystick's rotation (in degrees)
 
+    private static DriverUtil du;
+
 	public DriveTrain() {
 
 		// Initializing everything
@@ -50,6 +53,8 @@ public class DriveTrain implements Runnable {
 
 		// Joystick
 		driveJoystick = new Joystick(1);
+
+        du = new DriverUtil();
 	}
 
 	public void run() {
@@ -131,4 +136,8 @@ public class DriveTrain implements Runnable {
 		SmartDashboard.putNumber("Smooth Var rotation", rotationSmooth);
 		SmartDashboard.putBoolean("Joystick state", joystickStateCommand);
 	}
+
+    public static synchronized DriverUtil getDriverUtil() {
+        return du;
+    }
 }

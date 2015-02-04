@@ -16,7 +16,7 @@ public class DriveForwardPoss implements AutoPossibilityInterface {
 
     @Override
     public void executePossibility(Sensors sensors, Lifter lifter, DriveTrain driverTrain) {
-        DriverUtil du = Robot3182.getDriverUtil();
+        DriverUtil du = DriveTrain.getDriverUtil();
         du.moveDriveTrainDistance(0, 5);
     }
 }

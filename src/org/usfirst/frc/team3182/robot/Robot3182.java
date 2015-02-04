@@ -30,8 +30,6 @@ public class Robot3182 extends IterativeRobot {
     //Declaring dashboard variable
     public static SendableChooser table = new SendableChooser();
 
-    private static DriverUtil du;
-    private static LifterUtil lu;
 
 
     /**
@@ -49,12 +47,7 @@ public class Robot3182 extends IterativeRobot {
         lifterVar = new Lifter(sensorsVar);
         new Thread(lifterVar, "Lifter").start();
 
-        du = new DriverUtil();
 
-        lu = new LifterUtil();
-
-
-        
     }
 
     /**
@@ -101,14 +94,8 @@ public class Robot3182 extends IterativeRobot {
      */
     @Override
     public void testInit() {
-        lu.resetLifter(); // Resets the lifter to the ready position
+        Lifter.reset(); // Resets the lifter to the ready position
     }
 
-    public static DriverUtil getDriverUtil(){
-        return du;
-    }
 
-    public static LifterUtil getLifterUtil() {
-        return lu;
-    }
 }

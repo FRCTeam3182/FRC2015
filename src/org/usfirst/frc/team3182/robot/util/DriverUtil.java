@@ -51,8 +51,9 @@ public class DriverUtil {
         double totDistance = Math.sqrt(distX * distX + distY * distY); //pythagorean theorem
         double encoderXTotDist = 0;
         double encoderYTotDist = 0;
-        for(Encoder e : encoders)
+        for(Encoder e : encoders) {
             e.reset();
+        }
         moveDriveTrain(xyRatio, yxRatio, 0, 0);
         do
         {
@@ -65,7 +66,7 @@ public class DriverUtil {
             encoderYTotDist += encoders.get(1).getDistance() / 4;
             encoderYTotDist += encoders.get(3).getDistance() / 4;
 
-        }while(Math.sqrt(Math.pow(encoderXTotDist, 2) + Math.pow(encoderYTotDist, 2))<totDistance);
+        }while(Math.sqrt(Math.pow(encoderXTotDist, 2) + Math.pow(encoderYTotDist, 2)) < totDistance);
 
         moveDriveTrain(0, 0, 0, 0);
     }

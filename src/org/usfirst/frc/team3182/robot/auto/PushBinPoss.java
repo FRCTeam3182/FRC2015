@@ -16,8 +16,8 @@ public class PushBinPoss implements AutoPossibilityInterface
 
     @Override
     public void executePossibility(Sensors sensors, Lifter lifter, DriveTrain driverTrain) {
-        DriverUtil du = Robot3182.getDriverUtil();
-        LifterUtil lu = Robot3182.getLifterUtil();
+        DriverUtil du = DriveTrain.getDriverUtil();
+        LifterUtil lu = Lifter.getLifterUtil();
         du.moveDriveTrainDistance(0, 2);
         lu.resetLifter();
         lu.setLifter(7); //TODO Change to correct measurements
