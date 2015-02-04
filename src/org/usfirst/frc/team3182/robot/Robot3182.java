@@ -11,15 +11,10 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.tables.ITable;
-import org.usfirst.frc.team3182.robot.auto.AutoPossibilityInterface;
-import org.usfirst.frc.team3182.robot.auto.DriveForwardPoss;
-import org.usfirst.frc.team3182.robot.auto.PushBinPoss;
-import org.usfirst.frc.team3182.robot.auto.PushTotePoss;
+import org.usfirst.frc.team3182.robot.auto.*;
 import org.usfirst.frc.team3182.robot.util.DriverUtil;
 import org.usfirst.frc.team3182.robot.util.LifterUtil;
 
-import java.util.ArrayList;
 
 public class Robot3182 extends IterativeRobot {
 
@@ -75,6 +70,9 @@ public class Robot3182 extends IterativeRobot {
 
         PushBinPoss pushBinPoss = new PushBinPoss();
         table.addObject(pushBinPoss.getName(), pushBinPoss);
+
+        UltimateBeautyPoss ultimateBeautyPoss = new UltimateBeautyPoss();
+        table.addObject(ultimateBeautyPoss.getName(), ultimateBeautyPoss);
 
         SmartDashboard.putData("Autonomous Mode Chooser", table);
     }
