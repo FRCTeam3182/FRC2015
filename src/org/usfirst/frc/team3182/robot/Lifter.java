@@ -7,29 +7,29 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 package org.usfirst.frc.team3182.robot;
 
+
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.DigitalInput;
 import org.usfirst.frc.team3182.robot.util.LifterUtil;
-
+import edu.wpi.first.wpilibj.Joystick;
 public class Lifter implements Runnable {
 
 	//declare instances
 	private Sensors sensors;
-	private Talon rightMotor;
-	private Talon leftMotor;
-	private Relay lock;
-
+	private Joystick lifterJoystick;
+	
 	private static LifterUtil lu;
 
 	public Lifter(Sensors sensors){
+		
 		lu = new LifterUtil();
-		rightMotor = new Talon(3);
-		leftMotor = new Talon(4);
+		lifterJoystick = new Joystick(2);
 		this.sensors = sensors;
+	
 	}
 	
 	public void run(){
+		lu.moveLifter(lifterJoystick.getAxis(Joystick.AxisType.kY));
 		
 	}
 

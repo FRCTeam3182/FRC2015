@@ -13,17 +13,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3182.robot.util.DriverUtil;
+import edu.wpi.first.wpilibj.Gyro;
 
 public class DriveTrain implements Runnable {
 
 
 	private final DriverStation driverStation;
-
-	// Direct motor commands (start at unmoving)
-//	private double rightFrontMotorCommand = 0;
-//	private double rightBackMotorCommand = 0;
-//	private double leftFrontMotorCommand = 0;
-//	private double leftBackMotorCommand = 0;
 
 	// General direction commands (start at unmoving)
 	private volatile double xCommand = 0; // 0 for unmoving, 1 for full strafe right, -1 for strafe left
@@ -40,16 +35,20 @@ public class DriveTrain implements Runnable {
 	private double rotationSmooth = 0;
 	private final double P = 0.10; // dead zone of joysticks for drive is between -P and P
 	private final double rotationP = 10; // dead zone for the joystick's rotation (in degrees)
-
-    private static DriverUtil du;
-
+    
+	// Initialize util 
+	private static DriverUtil du;
+	
+	// Initialze gyro   
+	private Gyro gyro;
+	
 	public DriveTrain() {
 
 		// Initializing everything
 		driverStation = DriverStation.getInstance();
 
-		// Drivetrain
-
+		// Instanciate
+		gyro = new Gyro(0);
 
 		// Joystick
 		driveJoystick = new Joystick(1);
@@ -109,12 +108,8 @@ public class DriveTrain implements Runnable {
                     rotationSmooth = ((1 / (1 - P)) * yCommand - (1 - (1 / (1 - P))));
                 }
 
-                // Drive ///////////needs solidifying//////////
-                // First possibility
-               //
-
-                // Second possibility
-                //    WRITE CUSTOM ARCADE MECANUM CODE HERE
+                // Drive using util
+                du.moveDriveTrain(xSmooth, ySmooth, rotationSmooth, gyro.getAngle());
             }
             driveToDashboard();
             Timer.delay(.1); //10ms delay
