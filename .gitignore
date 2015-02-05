@@ -23,4 +23,7 @@ META-INF/application.xml
 *.gradle
 gradlew.bat
 gradlew.sh
+gradlew
 gradle/
+
+build/

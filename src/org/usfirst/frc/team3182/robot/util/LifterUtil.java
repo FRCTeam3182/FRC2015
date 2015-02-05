@@ -22,6 +22,7 @@ public class LifterUtil {
 
         limitSwitches.set(0, new DigitalInput(13));
         limitSwitches.set(1, new DigitalInput(14));
+
     }
 
     /**
