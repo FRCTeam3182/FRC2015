@@ -17,6 +17,7 @@ target/
 
 # misc
 .settings
+*.class
 dependency-reduced-pom.xml
 META-INF/application.xml
 *.gradle
