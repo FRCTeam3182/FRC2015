@@ -8,12 +8,9 @@
 
 package org.usfirst.frc.team3182.robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3182.robot.util.DriverUtil;
-import edu.wpi.first.wpilibj.Gyro;
 
 public class DriveTrain implements Runnable {
 
@@ -47,8 +44,8 @@ public class DriveTrain implements Runnable {
 		// Initializing everything
 		driverStation = DriverStation.getInstance();
 
-		// Instanciate
-		gyro = new Gyro(0);
+		// Instantiate
+		gyro = new Gyro(new AnalogInput(0));
 
 		// Joystick
 		driveJoystick = new Joystick(1);

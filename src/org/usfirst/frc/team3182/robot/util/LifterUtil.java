@@ -21,7 +21,7 @@ public class LifterUtil {
         encoders.set(1, new Encoder(11,12));
 
         limitSwitches.set(0, new DigitalInput(13));
-        limitSwitches.set(1, new DigitalInput(14));
+        //limitSwitches.set(1, new DigitalInput(14));
 
     }
 
