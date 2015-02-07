@@ -10,12 +10,17 @@ package org.usfirst.frc.team3182.robot;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3182.robot.util.DriverUtil;
+
+import java.util.ArrayList;
 
 public class DriveTrain implements Runnable {
 
 
 	private final DriverStation driverStation;
+
+    private final RobotDrive drive;
+
+    private ArrayList<Encoder> encoders = new ArrayList<Encoder>(4);
 
 	// General direction commands (start at unmoving)
 	private volatile double xCommand = 0; // 0 for unmoving, 1 for full strafe right, -1 for strafe left
@@ -33,8 +38,7 @@ public class DriveTrain implements Runnable {
 	private final double P = 0.10; // dead zone of joysticks for drive is between -P and P
 	private final double rotationP = 10; // dead zone for the joystick's rotation (in degrees)
     
-	// Initialize util 
-	private static DriverUtil du;
+
 	
 	// Initialze gyro   
 	private Gyro gyro;
@@ -50,7 +54,15 @@ public class DriveTrain implements Runnable {
 		// Joystick
 		driveJoystick = new Joystick(1);
 
-        du = new DriverUtil();
+
+
+        drive = new RobotDrive(0, 1, 2, 3); // TODO Check the motor direction
+        drive.setSafetyEnabled(false);
+
+        encoders.set(0, new Encoder(1,2));
+        encoders.set(1, new Encoder(3,4));
+        encoders.set(2, new Encoder(5,6));
+        encoders.set(3, new Encoder(7,8)); // TODO Check all these ports
 	}
 
 	public void run() {
@@ -106,7 +118,7 @@ public class DriveTrain implements Runnable {
                 }
 
                 // Drive using util
-                du.moveDriveTrain(xSmooth, ySmooth, rotationSmooth, gyro.getAngle());
+                moveDriveTrain(xSmooth, ySmooth, rotationSmooth, gyro.getAngle());
             }
             driveToDashboard();
             Timer.delay(.1); //10ms delay
@@ -117,6 +129,44 @@ public class DriveTrain implements Runnable {
 		this.joystickStateCommand = joystickStateCommand;
 	}
 
+    public void moveDriveTrain(double x, double y, double rotation){
+        drive.mecanumDrive_Cartesian(x, y, rotation, 0);
+    }
+
+    public void moveDriveTrain(double x, double y, double rotation, double gyro){
+        drive.mecanumDrive_Cartesian(x, y, rotation, gyro);
+    }
+
+    public void moveDriveTrainDistance(double distX, double distY)
+    {
+        //Moves the robot in an arbitrary distance unit, determined by the encoder's output
+        //double oldDistance = 0.00;
+        distX = distX * 1;
+        distY = distY * 1; // TODO Change to correct values
+        double xyRatio = distX/(distY+distX);
+        double yxRatio = distY/(distY+distX);
+        double totDistance = Math.sqrt(distX * distX + distY * distY); //pythagorean theorem
+        double encoderXTotDist = 0;
+        double encoderYTotDist = 0;
+        for(Encoder e : encoders) {
+            e.reset();
+        }
+        moveDriveTrain(xyRatio, yxRatio, 0, 0);
+        do
+        {
+            encoderXTotDist -= encoders.get(0).getDistance() / 4;
+            encoderXTotDist += encoders.get(2).getDistance() / 4;
+            encoderXTotDist += encoders.get(1).getDistance() / 4;
+            encoderXTotDist -= encoders.get(3).getDistance() / 4;
+            encoderYTotDist += encoders.get(0).getDistance() / 4;
+            encoderYTotDist += encoders.get(2).getDistance() / 4;
+            encoderYTotDist += encoders.get(1).getDistance() / 4;
+            encoderYTotDist += encoders.get(3).getDistance() / 4;
+
+        }while(Math.sqrt(Math.pow(encoderXTotDist, 2) + Math.pow(encoderYTotDist, 2)) < totDistance);
+
+        moveDriveTrain(0, 0, 0, 0);
+    }
 
 
 	private void driveToDashboard() {
@@ -129,7 +179,5 @@ public class DriveTrain implements Runnable {
 		SmartDashboard.putBoolean("Joystick state", joystickStateCommand);
 	}
 
-    public static synchronized DriverUtil getDriverUtil() {
-        return du;
-    }
+
 }

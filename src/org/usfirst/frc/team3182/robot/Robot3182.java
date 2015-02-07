@@ -12,17 +12,15 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3182.robot.auto.*;
-import org.usfirst.frc.team3182.robot.util.DriverUtil;
-import org.usfirst.frc.team3182.robot.util.LifterUtil;
 
 
 public class Robot3182 extends IterativeRobot {
 
     //Declaring thread variables
-    private DriveTrain driveTrainVar;
+    private static DriveTrain driveTrainVar;
     private Sensors sensorsVar;
     private ArduinoLights arduinoLightsVar;
-    private Lifter lifterVar;
+    private static Lifter lifterVar;
     
     //Declaring joystick variable
     private Joystick buttonsJoystick;
@@ -97,5 +95,11 @@ public class Robot3182 extends IterativeRobot {
         Lifter.reset(); // Resets the lifter to the ready position
     }
 
+    public static DriveTrain getDriveTrain() {
+        return driveTrainVar;
+    }
 
+    public static Lifter getLifter() {
+        return lifterVar;
+    }
 }
