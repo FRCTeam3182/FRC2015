@@ -20,7 +20,7 @@ public class DriveTrain implements Runnable {
 
     private final RobotDrive drive;
 
-    private ArrayList<Encoder> encoders = new ArrayList<Encoder>(4);
+    private ArrayList<Encoder> encoders = new ArrayList<Encoder>();
 
 	// General direction commands (start at unmoving)
 	private volatile double xCommand = 0; // 0 for unmoving, 1 for full strafe right, -1 for strafe left
@@ -59,10 +59,10 @@ public class DriveTrain implements Runnable {
         drive = new RobotDrive(0, 1, 2, 3); // TODO Check the motor direction
         drive.setSafetyEnabled(false);
 
-        encoders.set(0, new Encoder(1,2));
-        encoders.set(1, new Encoder(3,4));
-        encoders.set(2, new Encoder(5,6));
-        encoders.set(3, new Encoder(7,8)); // TODO Check all these ports
+        encoders.add(new Encoder(1,2));
+        encoders.add(new Encoder(3,4));
+        encoders.add(new Encoder(5,6));
+        encoders.add(new Encoder(7,8)); // TODO Check all these ports
 	}
 
 	public void run() {

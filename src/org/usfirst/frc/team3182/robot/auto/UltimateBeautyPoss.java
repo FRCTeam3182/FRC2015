@@ -3,7 +3,7 @@ package org.usfirst.frc.team3182.robot.auto;
 import org.usfirst.frc.team3182.robot.DriveTrain;
 import org.usfirst.frc.team3182.robot.Lifter;
 import org.usfirst.frc.team3182.robot.Robot3182;
-import org.usfirst.frc.team3182.robot.Sensors;
+//import org.usfirst.frc.team3182.robot.Sensors;
 
 public class UltimateBeautyPoss implements AutoPossibilityInterface {
 
@@ -13,7 +13,7 @@ public class UltimateBeautyPoss implements AutoPossibilityInterface {
     }
 
     @Override
-    public void executePossibility(Sensors sensors, Lifter lifter, DriveTrain driverTrain) { //TODO Change to correct values
+    public void executePossibility(Lifter lifter, DriveTrain driverTrain) { //TODO Change to correct values
         DriveTrain dt = Robot3182.getDriveTrain();
         Lifter l = Robot3182.getLifter();
         l.resetLifter();

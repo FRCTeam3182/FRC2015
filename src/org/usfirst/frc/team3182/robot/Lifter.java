@@ -10,7 +10,6 @@ package org.usfirst.frc.team3182.robot;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DigitalInput;
-import org.usfirst.frc.team3182.robot.util.LifterUtil;
 import edu.wpi.first.wpilibj.Joystick;
 
 import java.util.ArrayList;
@@ -18,28 +17,28 @@ import java.util.ArrayList;
 public class Lifter implements Runnable {
 
 	//declare instances
-	private Sensors sensors;
+//	private Sensors sensors;
 	private Joystick lifterJoystick;
 	
 
 
-	private ArrayList<Talon> talons = new ArrayList<Talon>(2);
-	private ArrayList<Encoder> encoders = new ArrayList<Encoder>(2);
+	private ArrayList<Talon> talons = new ArrayList<Talon>();
+	private ArrayList<Encoder> encoders = new ArrayList<Encoder>();
 
-	private ArrayList<DigitalInput> limitSwitches = new ArrayList<DigitalInput>(2);
+	private DigitalInput limitSwitch;
+	
+	public Lifter(){
 
-	public Lifter(Sensors sensors){
+		talons.add(new Talon(4));
+		talons.add(new Talon(5));
 
-		talons.add(0, new Talon(4));
-		talons.add(1, new Talon(5));
+		encoders.add(new Encoder(9,10));
+		encoders.add(new Encoder(11,12));
 
-		encoders.set(0, new Encoder(9,10));
-		encoders.set(1, new Encoder(11,12));
-
-		limitSwitches.set(0, new DigitalInput(13));
+		limitSwitch = new DigitalInput(13);
 
 		lifterJoystick = new Joystick(2);
-		this.sensors = sensors;
+//		this.sensors = sensors;
 	
 	}
 	
@@ -89,7 +88,7 @@ public class Lifter implements Runnable {
 	}
 
 	public void resetLifter(){
-		while (!limitSwitches.get(0).get()){ // TODO See which limit switch is at bottom and if .get() returns true when down
+		while (!limitSwitch.get()){ // TODO See which limit switch is at bottom and if .get() returns true when down
 			talons.get(0).set(0.3);
 			talons.get(1).set(-0.3); // TODO See which Talon needs to be reversed
 		}

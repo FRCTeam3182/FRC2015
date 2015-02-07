@@ -23,22 +23,22 @@ public class ArduinoLights implements Runnable {
 
     //declare instances
     private DriverStation driverStation;
-    private Sensors sensors;
+    //private Sensors sensors;
     private SerialPort arduino;
     private Port port;
 
-    public ArduinoLights(Sensors sensors) {
+    public ArduinoLights() {
         //initializing everything
         arduino = new SerialPort(9600, port); //I2C line for transmitting data
         driverStation = DriverStation.getInstance();
-        this.sensors = sensors;
+//        this.sensors = sensors;
     }
 
     public void run() {
         while (true) {
             //store all of the data to variables
             isAuto = driverStation.isAutonomous();
-            distance = sensors.shootingDistance();
+//            distance = sensors.shootingDistance();
 
             //how to send stuff
              

@@ -18,17 +18,12 @@ public class Robot3182 extends IterativeRobot {
 
     //Declaring thread variables
     private static DriveTrain driveTrainVar;
-    private Sensors sensorsVar;
+//    private Sensors sensorsVar;
     private ArduinoLights arduinoLightsVar;
     private static Lifter lifterVar;
-    
-    //Declaring joystick variable
-    private Joystick buttonsJoystick;
 
     //Declaring dashboard variable
     public static SendableChooser table = new SendableChooser();
-
-
 
     /**
      * Called once when the robot is turned on
@@ -38,11 +33,9 @@ public class Robot3182 extends IterativeRobot {
         //Initialize the threads
         driveTrainVar = new DriveTrain();
         new Thread(driveTrainVar, "DriveTrain").start();
-        sensorsVar = new Sensors();
-        new Thread(sensorsVar, "Sensors").start();
-        arduinoLightsVar = new ArduinoLights(sensorsVar);
-        new Thread(arduinoLightsVar, "ArduinoLights").start();
-        lifterVar = new Lifter(sensorsVar);
+//        arduinoLightsVar = new ArduinoLights();
+//        new Thread(arduinoLightsVar, "ArduinoLights").start();
+        lifterVar = new Lifter();
         new Thread(lifterVar, "Lifter").start();
 
 
@@ -75,7 +68,7 @@ public class Robot3182 extends IterativeRobot {
     public void autonomousInit() {
         AutoPossibilityInterface possibility;
         possibility = (AutoPossibilityInterface) table.getSelected();
-        possibility.executePossibility(sensorsVar, lifterVar, driveTrainVar);
+        possibility.executePossibility(lifterVar, driveTrainVar);
 
     }
 
