@@ -4,7 +4,6 @@ import org.usfirst.frc.team3182.robot.DriveTrain;
 import org.usfirst.frc.team3182.robot.Lifter;
 import org.usfirst.frc.team3182.robot.Robot3182;
 import org.usfirst.frc.team3182.robot.Sensors;
-import org.usfirst.frc.team3182.robot.util.LifterUtil;
 
 public class PushBinPoss implements AutoPossibilityInterface
 {
@@ -16,11 +15,11 @@ public class PushBinPoss implements AutoPossibilityInterface
     @Override
     public void executePossibility(Sensors sensors, Lifter lifter, DriveTrain driverTrain) {
         DriveTrain dt = Robot3182.getDriveTrain();
-        LifterUtil lu = Lifter.getLifterUtil();
+        Lifter l = Robot3182.getLifter();
         dt.moveDriveTrainDistance(0, 2);
-        lu.resetLifter();
-        lu.setLifter(7); //TODO Change to correct measurements
+        l.resetLifter();
+        l.setLifter(7); //TODO Change to correct measurements
         dt.moveDriveTrainDistance(0, 10);
-        lu.resetLifter();
+        l.resetLifter();
     }
 }

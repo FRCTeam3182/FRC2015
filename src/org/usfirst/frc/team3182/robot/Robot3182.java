@@ -92,7 +92,7 @@ public class Robot3182 extends IterativeRobot {
      */
     @Override
     public void testInit() {
-        Lifter.reset(); // Resets the lifter to the ready position
+        lifterVar.reset(); // Resets the lifter to the ready position
     }
 
     public static DriveTrain getDriveTrain() {
