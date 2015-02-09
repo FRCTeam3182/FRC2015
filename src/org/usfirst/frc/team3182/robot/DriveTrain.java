@@ -56,13 +56,13 @@ public class DriveTrain implements Runnable {
 
 
 
-        drive = new RobotDrive(0, 1, 2, 3); // TODO Check the motor direction
+        drive = new RobotDrive(0, 1, 2, 3);
         drive.setSafetyEnabled(false);
 
-        encoders.add(new Encoder(1,2));
-        encoders.add(new Encoder(3,4));
-        encoders.add(new Encoder(5,6));
-        encoders.add(new Encoder(7,8)); // TODO Check all these ports
+        encoders.add(new Encoder(1, 2));
+        encoders.add(new Encoder(3, 4));
+        encoders.add(new Encoder(5, 6));
+        encoders.add(new Encoder(7, 8)); // TODO Check all these ports
 	}
 
 	public void run() {
@@ -110,14 +110,14 @@ public class DriveTrain implements Runnable {
                 }
                 // If the rotation is positive and passed the deadzone (joystick is twisted clockwise) 
                 if (rotationCommand >= rotationP) {
-                    rotationSmooth = ((1 / (1 - P)) * yCommand + (1 - (1 / (1 - P))));
+                    rotationSmooth = ((1 / (1 - rotationP)) * yCommand + (1 - (1 / (1 - P))));
                 }
-                // If the rotation is negative and passed the deadzone (joystick is twisted counterclockwise
+                // If the rotation is negative and passed the deadzone (joystick is twisted counterclockwise)
                 if (yCommand <= rotationP) {
-                    rotationSmooth = ((1 / (1 - P)) * yCommand - (1 - (1 / (1 - P))));
+                    rotationSmooth = ((1 / (1 - rotationP)) * yCommand - (1 - (1 / (1 - P))));
                 }
 
-                // Drive using util
+
                 moveDriveTrain(xSmooth, ySmooth, rotationSmooth, gyro.getAngle());
             }
             driveToDashboard();

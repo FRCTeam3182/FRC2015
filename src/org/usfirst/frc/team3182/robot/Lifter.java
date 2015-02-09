@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Lifter implements Runnable {
 
 	//declare instances
-//	private Sensors sensors;
+
 	private Joystick lifterJoystick;
 	
 
@@ -38,8 +38,7 @@ public class Lifter implements Runnable {
 		limitSwitch = new DigitalInput(13);
 
 		lifterJoystick = new Joystick(2);
-//		this.sensors = sensors;
-	
+
 	}
 	
 	public void run(){

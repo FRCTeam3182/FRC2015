@@ -3,7 +3,6 @@ package org.usfirst.frc.team3182.robot.auto;
 import org.usfirst.frc.team3182.robot.DriveTrain;
 import org.usfirst.frc.team3182.robot.Lifter;
 import org.usfirst.frc.team3182.robot.Robot3182;
-//import org.usfirst.frc.team3182.robot.Sensors;
 
 public class PushBinPoss implements AutoPossibilityInterface
 {

@@ -31,7 +31,6 @@ public class ArduinoLights implements Runnable {
         //initializing everything
         arduino = new SerialPort(9600, port); //I2C line for transmitting data
         driverStation = DriverStation.getInstance();
-//        this.sensors = sensors;
     }
 
     public void run() {

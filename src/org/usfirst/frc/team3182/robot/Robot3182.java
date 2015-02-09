@@ -8,7 +8,6 @@
 package org.usfirst.frc.team3182.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3182.robot.auto.*;
@@ -18,7 +17,6 @@ public class Robot3182 extends IterativeRobot {
 
     //Declaring thread variables
     private static DriveTrain driveTrainVar;
-//    private Sensors sensorsVar;
     private ArduinoLights arduinoLightsVar;
     private static Lifter lifterVar;
 
@@ -30,7 +28,9 @@ public class Robot3182 extends IterativeRobot {
      */
     public void robotInit() {
         listOfPossibilities();
+
         //Initialize the threads
+
         driveTrainVar = new DriveTrain();
         new Thread(driveTrainVar, "DriveTrain").start();
 //        arduinoLightsVar = new ArduinoLights();
