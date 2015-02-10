@@ -49,4 +49,28 @@ public class ArduinoLights implements Runnable {
             Timer.delay(.01);
         }
     }
+
+    public void setLightSequence(LightsEnum selection){
+        if (selection == LightsEnum.RANDOM){
+            randomSequence();
+        }
+        else if (selection == LightsEnum.PATTERN){
+            patternSequence();
+        }
+        else if (selection == LightsEnum.WITH_LIFTER){
+            withLifterSequence();
+        }
+    }
+
+    private void randomSequence(){
+        // TODO Add light code for random sequence
+    }
+
+    private void patternSequence(){
+        // TODO Add pattern sequence
+    }
+
+    private void withLifterSequence(){
+        //TODO Add lifter sequence
+    }
 }

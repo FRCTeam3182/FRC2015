@@ -17,6 +17,7 @@ public class Robot3182 extends IterativeRobot {
 
     //Declaring thread variables
     private static DriveTrain driveTrainVar;
+
     private ArduinoLights arduinoLightsVar;
     private static Lifter lifterVar;
 
@@ -38,6 +39,8 @@ public class Robot3182 extends IterativeRobot {
         lifterVar = new Lifter();
         new Thread(lifterVar, "Lifter").start();
 
+
+        arduinoLightsVar.setLightSequence(LightsEnum.RANDOM);
 
     }
 
@@ -94,5 +97,9 @@ public class Robot3182 extends IterativeRobot {
 
     public static Lifter getLifter() {
         return lifterVar;
+    }
+
+    public ArduinoLights getArduinoLights() {
+        return arduinoLightsVar;
     }
 }
