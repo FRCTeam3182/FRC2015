@@ -7,10 +7,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 package org.usfirst.frc.team3182.robot;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.*;
 
 import java.util.ArrayList;
 
@@ -25,6 +22,8 @@ public class Lifter implements Runnable {
 	private ArrayList<Talon> talons = new ArrayList<Talon>();
 	private ArrayList<Encoder> encoders = new ArrayList<Encoder>();
 
+	private ArrayList<Ultrasonic> ultrasonics = new ArrayList<Ultrasonic>();
+
 	private DigitalInput limitSwitch;
 	
 	public Lifter(){
@@ -34,6 +33,9 @@ public class Lifter implements Runnable {
 
 		encoders.add(new Encoder(9,10));
 		encoders.add(new Encoder(11,12));
+
+		ultrasonics.add(new Ultrasonic(14, 15));
+		ultrasonics.add(new Ultrasonic(16, 17));
 
 		limitSwitch = new DigitalInput(13);
 
@@ -85,6 +87,7 @@ public class Lifter implements Runnable {
 
 		}
 	}
+
 
 	public void resetLifter(){
 		while (!limitSwitch.get()){ // TODO See which limit switch is at bottom and if .get() returns true when down
