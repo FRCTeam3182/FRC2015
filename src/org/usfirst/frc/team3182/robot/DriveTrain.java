@@ -29,7 +29,7 @@ public class DriveTrain implements Runnable {
 
 	// Joysticks
 	private final Joystick driveJoystick;
-	private volatile boolean joystickStateCommand; // false to disable joysticks
+	private volatile boolean joystickStateCommand = true; // false to disable joysticks
 
 	// Deadzone and smoothing
 	private double ySmooth = 0; // for making joystick output a linear function between P and 1 and -P to -1
@@ -57,6 +57,8 @@ public class DriveTrain implements Runnable {
 
 
         drive = new RobotDrive(0, 1, 2, 3);
+        drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
         drive.setSafetyEnabled(false);
 
         encoders.add(new Encoder(1, 2));
@@ -70,8 +72,8 @@ public class DriveTrain implements Runnable {
 
             // If joystickStateCommand is true, get the joystick values
             if (joystickStateCommand) {
-            	xCommand = driveJoystick.getAxis(Joystick.AxisType.kX); ////These values need to be checked//
-            	yCommand = driveJoystick.getAxis(Joystick.AxisType.kY); ////to see if they're what we want///
+            	xCommand = driveJoystick.getAxis(Joystick.AxisType.kX);
+            	yCommand = driveJoystick.getAxis(Joystick.AxisType.kY);
             	rotationCommand = driveJoystick.getTwist();
             }
             if (driverStation.isEnabled()) {
@@ -118,7 +120,8 @@ public class DriveTrain implements Runnable {
                 }
 
 
-                moveDriveTrain(xSmooth, ySmooth, rotationSmooth, gyro.getAngle());
+                //moveDriveTrain(xCommand, yCommand, rotationCommand, gyro.getAngle());
+                moveDriveTrain(xSmooth, ySmooth, 0, gyro.getAngle());
             }
             driveToDashboard();
             Timer.delay(.1); //10ms delay

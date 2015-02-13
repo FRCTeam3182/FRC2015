@@ -40,7 +40,7 @@ public class Robot3182 extends IterativeRobot {
         new Thread(lifterVar, "Lifter").start();
 
 
-        arduinoLightsVar.setLightSequence(LightsEnum.RANDOM);
+        //arduinoLightsVar.setLightSequence(LightsEnum.RANDOM);
 
     }
 

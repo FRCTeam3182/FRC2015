@@ -87,6 +87,17 @@ public class Lifter implements Runnable {
 
 		}
 	}
+	
+	/*
+	 * Uses the ultrasonic sensors to drive the robot to line up properly with the totes
+	 */
+	public void getInPosition(){
+		
+		//check if the lifter is in the correct place
+		
+		//
+	
+	}
 
 
 	public void resetLifter(){
@@ -100,5 +111,4 @@ public class Lifter implements Runnable {
 	public synchronized void reset() {
 		resetLifter();
 	}
-
 }
