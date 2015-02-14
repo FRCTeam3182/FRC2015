@@ -54,7 +54,7 @@ public class DriveTrain implements Runnable {
 		gyro = new Gyro(new AnalogInput(0));
 
 		// Joystick
-		driveJoystick = new Joystick(1);
+		driveJoystick = new Joystick(0);
 
 //        talons.add(new Talon(0));
 //        talons.add(new Talon(1));

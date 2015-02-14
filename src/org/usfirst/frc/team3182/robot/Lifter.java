@@ -39,13 +39,12 @@ public class Lifter implements Runnable {
 
 		limitSwitch = new DigitalInput(13);
 
-		lifterJoystick = new Joystick(2);
+		lifterJoystick = new Joystick(1);
 
 	}
 	
 	public void run(){
 		moveLifter(lifterJoystick.getAxis(Joystick.AxisType.kY));
-		
 	}
 
 	/**
