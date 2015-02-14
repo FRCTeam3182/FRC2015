@@ -18,7 +18,7 @@ public class DriveTrain implements Runnable {
 
 	private final DriverStation driverStation;
 
-    private final RobotDrive drive;
+    private final RobotDrive drive = null;
 
     private ArrayList<Encoder> encoders = new ArrayList<Encoder>();
 
@@ -56,17 +56,17 @@ public class DriveTrain implements Runnable {
 		// Joystick
 		driveJoystick = new Joystick(1);
 
-        talons.add(0, new Talon(0));
-        talons.add(1, new Talon(1));
-        talons.add(2, new Talon(2));
-        talons.add(3, new Talon(3));
+        talons.add(new Talon(0));
+        talons.add(new Talon(1));
+        talons.add(new Talon(2));
+        talons.add(new Talon(3));
 
 
 
-        drive = new RobotDrive(0, 1, 2, 3);
-        drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
-        drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
-        drive.setSafetyEnabled(false);
+       //drive = new RobotDrive(0, 1, 2, 3);
+        //drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+        //drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+//        drive.setSafetyEnabled(true);
 
         encoders.add(new Encoder(1, 2));
         encoders.add(new Encoder(3, 4));
@@ -80,8 +80,11 @@ public class DriveTrain implements Runnable {
             // If joystickStateCommand is true, get the joystick values
             if (joystickStateCommand) {
                 if (driveJoystick.getRawButton(1)){
-                    moveDriveTrain_Speed(1, 1, 1, 1);  //TODO Remove this because this is for testing only
-                    return;
+                	moveDriveTrain_Speed(.3,.3,.3,.3);  //TODO Remove this because this is for testing only
+                		
+                }
+                else {
+                	moveDriveTrain_Speed(0,0,0,0);
                 }
             	xCommand = driveJoystick.getAxis(Joystick.AxisType.kX);
             	yCommand = driveJoystick.getAxis(Joystick.AxisType.kY);
@@ -133,7 +136,7 @@ public class DriveTrain implements Runnable {
 
                 //moveDriveTrain(xCommand, yCommand, rotationCommand, gyro.getAngle());
                 //moveDriveTrain(xSmooth, ySmooth, 0, gyro.getAngle());
-                moveDriveTrain_Speed(xCommand, xCommand, xCommand, xCommand);
+//                moveDriveTrain_Speed(xCommand, xCommand, xCommand, xCommand);
             }
             driveToDashboard();
             Timer.delay(.1); //10ms delay
@@ -146,9 +149,9 @@ public class DriveTrain implements Runnable {
 
     public void moveDriveTrain_Speed(double frontLSpeed, double frontRSpeed, double rearLSpeed, double readRSpeed){
         talons.get(0).set(frontLSpeed);
-        talons.get(1).set(frontRSpeed);
+        talons.get(1).set(-frontRSpeed);
         talons.get(2).set(rearLSpeed);
-        talons.get(3).set(readRSpeed);
+        talons.get(3).set(-readRSpeed);
     }
 
     public void moveDriveTrain(double x, double y, double rotation){
