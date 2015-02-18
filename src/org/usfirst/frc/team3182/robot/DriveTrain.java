@@ -66,7 +66,7 @@ public class DriveTrain implements Runnable {
         drive = new RobotDrive(0, 1, 2, 3);
         drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
-        //drive.setSafetyEnabled(true);
+        drive.setSafetyEnabled(false);
 
         encoders.add(new Encoder(1, 2));
         encoders.add(new Encoder(3, 4));
@@ -108,39 +108,39 @@ public class DriveTrain implements Runnable {
                     xCommand = 0;
                 }
 
-                //Smoothing
-                //If the x is positive and passed the deadzone (joystick is moved to the right)
-                if (xCommand >= P) {
-                    xSmooth = ((1 / (1 - P)) * xCommand + (1 - (1 / (1 - P))));
-                }
-                // If the x is negative and passed the deadzone (joystick is moved to the left) 
-                if (xCommand <= (-P)) {
-                    xSmooth = ((1 / (1 - P)) * xCommand - (1 - (1 / (1 - P))));
-                }
-                // If the y is positive and passed the deadzone (joystick is moved to the up) 
-                if (yCommand >= P) {
-                    ySmooth = ((1 / (1 - P)) * yCommand + (1 - (1 / (1 - P))));
-                }
-                // If the y is negative and passed the deadzone (joystick is moved to the down) 
-                if (yCommand <= (-P)) {
-                    ySmooth = ((1 / (1 - P)) * yCommand - (1 - (1 / (1 - P))));
-                }
-                // If the rotation is positive and passed the deadzone (joystick is twisted clockwise) 
-                if (rotationCommand >= rotationP) {
-                    rotationSmooth = ((1 / (1 - rotationP)) * yCommand + (1 - (1 / (1 - P))));
-                }
-                // If the rotation is negative and passed the deadzone (joystick is twisted counterclockwise)
-                if (yCommand <= rotationP) {
-                    rotationSmooth = ((1 / (1 - rotationP)) * yCommand - (1 - (1 / (1 - P))));
-                }
+//                //Smoothing
+//                //If the x is positive and passed the deadzone (joystick is moved to the right)
+//                if (xCommand >= P) {
+//                    xSmooth = ((1 / (1 - P)) * xCommand + (1 - (1 / (1 - P))));
+//                }
+//                // If the x is negative and passed the deadzone (joystick is moved to the left) 
+//                if (xCommand <= (-P)) {
+//                    xSmooth = ((1 / (1 - P)) * xCommand - (1 - (1 / (1 - P))));
+//                }
+//                // If the y is positive and passed the deadzone (joystick is moved to the up) 
+//                if (yCommand >= P) {
+//                    ySmooth = ((1 / (1 - P)) * yCommand + (1 - (1 / (1 - P))));
+//                }
+//                // If the y is negative and passed the deadzone (joystick is moved to the down) 
+//                if (yCommand <= (-P)) {
+//                    ySmooth = ((1 / (1 - P)) * yCommand - (1 - (1 / (1 - P))));
+//                }
+//                // If the rotation is positive and passed the deadzone (joystick is twisted clockwise) 
+//                if (rotationCommand >= rotationP) {
+//                    rotationSmooth = ((1 / (1 - rotationP)) * yCommand + (1 - (1 / (1 - P))));
+//                }
+//                // If the rotation is negative and passed the deadzone (joystick is twisted counterclockwise)
+//                if (yCommand <= rotationP) {
+//                    rotationSmooth = ((1 / (1 - rotationP)) * yCommand - (1 - (1 / (1 - P))));
+//                }
 
 
-                moveDriveTrain(xCommand, yCommand, 0, gyro.getAngle());
+                moveDriveTrain(xCommand, yCommand, 0, 0);
                 //moveDriveTrain(xSmooth, ySmooth, 0, gyro.getAngle());
 //                moveDriveTrain_Speed(xCommand, xCommand, xCommand, xCommand);
             }
             driveToDashboard();
-            Timer.delay(.1); //10ms delay
+            Timer.delay(.1); //100ms delay
         }
 	}
 
