@@ -11,8 +11,7 @@ package org.usfirst.frc.team3182.robot;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SerialPort.Port;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Timer;
+import org.usfirst.frc.team3182.robot.lights.LightsEnum;
 
 
 public class ArduinoLights implements Runnable {
@@ -33,26 +32,10 @@ public class ArduinoLights implements Runnable {
     }
 
     public synchronized void setLightSequence(LightsEnum selection){
-        if (selection == LightsEnum.RANDOM){
-            randomSequence();
-        }
-        else if (selection == LightsEnum.PATTERN){
-            patternSequence();
-        }
-        else if (selection == LightsEnum.WITH_LIFTER){
-            withLifterSequence();
-        }
+       sendID(selection.getID());
     }
 
-    private void randomSequence(){
-        // TODO Add light code for random sequence
-    }
-
-    private void patternSequence(){
-        // TODO Add pattern sequence
-    }
-
-    private void withLifterSequence(){
-        //TODO Add lifter sequence
-    }
+   private void sendID(int id){
+       arduino.writeString(String.valueOf(id));
+   }
 }

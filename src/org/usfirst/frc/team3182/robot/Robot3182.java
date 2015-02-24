@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3182.robot.auto.*;
+import org.usfirst.frc.team3182.robot.lights.LightsEnum;
 
 
 public class Robot3182 extends IterativeRobot {
@@ -34,13 +35,13 @@ public class Robot3182 extends IterativeRobot {
 
         driveTrainVar = new DriveTrain();
         new Thread(driveTrainVar, "DriveTrain").start();
-//        arduinoLightsVar = new ArduinoLights();
-//        new Thread(arduinoLightsVar, "ArduinoLights").start();
+        arduinoLightsVar = new ArduinoLights();
+        new Thread(arduinoLightsVar, "ArduinoLights").start();
         lifterVar = new Lifter();
         new Thread(lifterVar, "Lifter").start();
 
 
-        //arduinoLightsVar.setLightSequence(LightsEnum.RANDOM);
+        arduinoLightsVar.setLightSequence(LightsEnum.RANDOM);
 
     }
 
@@ -80,7 +81,7 @@ public class Robot3182 extends IterativeRobot {
      */
     @Override
     public void teleopPeriodic() {
-
+        
     }
 
     /**
