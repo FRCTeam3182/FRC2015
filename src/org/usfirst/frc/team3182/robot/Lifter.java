@@ -16,7 +16,8 @@ public class Lifter implements Runnable {
 	//declare instances
 
 	private Joystick lifterJoystick;
-	
+
+	private PIDController pidController;
 
 
 	private ArrayList<Talon> talons = new ArrayList<Talon>();
@@ -40,6 +41,8 @@ public class Lifter implements Runnable {
 		limitSwitch = new DigitalInput(13);
 
 		lifterJoystick = new Joystick(1);
+
+		pidController = new PIDController(0.45, 0, 0, encoders.get(0), talons.get(0));
 
 	}
 	
