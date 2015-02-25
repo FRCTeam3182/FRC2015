@@ -7,7 +7,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 package org.usfirst.frc.team3182.robot;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.*;   
 
 import java.util.ArrayList;
 
@@ -26,13 +26,14 @@ public class Lifter implements Runnable {
 
 	private DigitalInput limitSwitch;
 	
+	private PIDController controller;
 	public Lifter(){
+		
+		talons.add(new Talon(4));         //Used w/ user input
+		talons.add(new Talon(5));         //Hopefully controlled by PID
 
-		talons.add(new Talon(4));
-		talons.add(new Talon(5));
-
-		encoders.add(new Encoder(9,10));
-		encoders.add(new Encoder(11,12));
+		encoders.add(new Encoder(9,10));  //Talon 4
+		encoders.add(new Encoder(11,12)); //Talon 5
 
 		ultrasonics.add(new Ultrasonic(14, 15));
 		ultrasonics.add(new Ultrasonic(16, 17));
@@ -40,11 +41,20 @@ public class Lifter implements Runnable {
 		limitSwitch = new DigitalInput(13);
 
 		lifterJoystick = new Joystick(1);
+		
+		controller = new PIDController(1.0, 0.1, 0.0, encoders.get(1), talons.get(1));     //instantiate PIDController
+																						   // TODO: tune
 
+		controller.setAbsoluteTolerance(1);
+		controller.setContinuous(true);
 	}
+	
+
 	
 	public void run(){
 		moveLifter(lifterJoystick.getAxis(Joystick.AxisType.kY));
+		controller.enable();
+		controller.setSetpoint(encoders.get(0).get()); //TODO: offset?
 	}
 
 	/**
@@ -59,7 +69,7 @@ public class Lifter implements Runnable {
 		}
 
 		talons.get(0).set(speed);
-		talons.get(1).set(speed * -1); // TODO See which Talon needs to be reversed
+		//talons.get(1).set(speed * -1); // maybe See which Talon needs to be reversed
 
 	}
 
@@ -67,25 +77,25 @@ public class Lifter implements Runnable {
 	 * Height is in inches (in)
 	 * @param heightIn
 	 */
-	public void setLifter(int heightIn){
-		int convertedHeight = heightIn * 2; // TODO Set real conversion rate
-
-		if (convertedHeight < 0 || convertedHeight > 100){ // TODO Change the max height
-			return;
-		}
-
-		while (encoders.get(0).getDistance() != convertedHeight){
-			if (convertedHeight < 0){
-				talons.get(0).set(-0.5);
-				talons.get(1).set(0.5);
-			}
-			else{
-				talons.get(0).set(0.5);
-				talons.get(1).set(-0.5);
-			}
-
-		}
-	}
+//	public void setLifter(int heightIn){
+//		int convertedHeight = heightIn * 2; // TODO Set real conversion rate
+//
+//		if (convertedHeight < 0 || convertedHeight > 100){ // TODO Change the max height
+//			return;
+//		}
+//
+//		while (encoders.get(0).getDistance() != convertedHeight){
+//			if (convertedHeight < 0){
+//				talons.get(0).set(-0.5);
+//		//		talons.get(1).set(0.5);
+//			}
+//			else{
+//				talons.get(0).set(0.5);
+//	//			talons.get(1).set(-0.5);
+//			}
+//
+//		}
+//	}
 	
 	/*
 	 * Uses the ultrasonic sensors to drive the robot to line up properly with the totes
@@ -102,7 +112,7 @@ public class Lifter implements Runnable {
 	public void resetLifter(){
 		while (!limitSwitch.get()){ // TODO See which limit switch is at bottom and if .get() returns true when down
 			talons.get(0).set(0.3);
-			talons.get(1).set(-0.3); // TODO See which Talon needs to be reversed
+		//	talons.get(1).set(-0.3);
 		}
 
 	}
@@ -110,4 +120,5 @@ public class Lifter implements Runnable {
 	public synchronized void reset() {
 		resetLifter();
 	}
+
 }
