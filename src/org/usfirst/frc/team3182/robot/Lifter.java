@@ -1,3 +1,4 @@
+
 /** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * 							Lifter
  *  This thread controls the lifter mechanisms and associated 
@@ -140,3 +141,4 @@ public class Lifter implements Runnable {
 	}
 
 }
+

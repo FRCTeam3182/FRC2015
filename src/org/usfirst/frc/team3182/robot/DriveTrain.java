@@ -54,7 +54,8 @@ public class DriveTrain implements Runnable {
 		gyro = new Gyro(new AnalogInput(0));
 
 		// Joystick
-		driveJoystick = new Joystick(0);
+			driveJoystick = new Joystick(0);
+
 
 //        talons.add(new Talon(0));
 //        talons.add(new Talon(1));
@@ -87,17 +88,18 @@ public class DriveTrain implements Runnable {
 //  //              	moveDriveTrain_Speed(0,0,0,0);
 //                	drive.mecanumDrive_Cartesian(0, 0, 0, 0);
 //                }
+        	if(joystickStateCommand) {
             	xCommand = driveJoystick.getAxis(Joystick.AxisType.kX);
             	yCommand = driveJoystick.getAxis(Joystick.AxisType.kY);
             	rotationCommand = driveJoystick.getTwist();
-            
+        	}
             if (driverStation.isEnabled()) {
                 /*=================================================================
                 -Makes sure joystick will not work at �P% throttle, P is declared above
                 -smoothVarRight/Left are output variables from a function
                 that calculates how much to power the motors
                 -Full throttle always outputs a 1 (full power)
-                -While joystick is in deadzone, a 0 is outputted
+                -While joystick is in deadzone, a 0 is output
                  =================================================================*/
 
                 //Deadzone
