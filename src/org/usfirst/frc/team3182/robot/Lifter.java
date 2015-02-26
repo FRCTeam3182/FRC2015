@@ -27,6 +27,11 @@ public class Lifter implements Runnable {
 	private DigitalInput limitSwitch;
 	
 	private PIDController controller;
+//	private PIDController m1control;
+//	private PIDController m2control;
+	
+	
+	
 	public Lifter(){
 		
 		talons.add(new Talon(4));         //Used w/ user input
@@ -44,7 +49,9 @@ public class Lifter implements Runnable {
 		
 		controller = new PIDController(1.0, 0.1, 0.0, encoders.get(1), talons.get(1));     //instantiate PIDController
 																						   // TODO: tune
-
+		//m1controller = new PIDController(1.0, 0.1, 0.0, encoders.get(0), talons.get(0));
+		//m2controller = new PIDController(1.0, 0.1, 0.0, encoders.get(1), talons.get(1));
+		//if you want double PID control
 		controller.setAbsoluteTolerance(1);
 		controller.setContinuous(true);
 	}
@@ -55,6 +62,10 @@ public class Lifter implements Runnable {
 		moveLifter(lifterJoystick.getAxis(Joystick.AxisType.kY));
 		controller.enable();
 		controller.setSetpoint(encoders.get(0).get()); //TODO: offset?
+		//m1controller.enable();
+		//m1controller.setSetpoint(lifterJoystick.getAxis(Joystick.AxisType.kY));
+		//m2controller.enable();
+		//m2controller.setSetpoint(lifterJoystick.getAxis(Joystick.AxisType.kY));
 	}
 
 	/**
@@ -69,9 +80,16 @@ public class Lifter implements Runnable {
 		}
 
 		talons.get(0).set(speed);
-		//talons.get(1).set(speed * -1); // maybe See which Talon needs to be reversed
+		//talons.get(1).set(speed * -1); 
 
 	}
+	public void moveLifterRaw(double speed) //also use if you want double PID control
+	{
+		controller.disable();
+		talons.get(0).set(speed);
+		talons.get(1).set(speed * -1); // maybe See which Talon needs to be reversed
+	}
+
 
 	/**
 	 * Height is in inches (in)
