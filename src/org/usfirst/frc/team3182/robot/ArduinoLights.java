@@ -16,13 +16,11 @@ import org.usfirst.frc.team3182.robot.lights.LightsEnum;
 
 public class ArduinoLights implements Runnable {
 
-
     private SerialPort arduino;
-    private Port port;
 
     public ArduinoLights() {
         //initializing everything
-        arduino = new SerialPort(9600, port); //I2C line for transmitting data
+        arduino = new SerialPort(9600, Port.kMXP); //Serial port for transmitting data
     }
 
     public void run() {
