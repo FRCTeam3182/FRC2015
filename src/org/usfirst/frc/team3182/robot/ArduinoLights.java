@@ -18,6 +18,8 @@ public class ArduinoLights implements Runnable {
 
     private SerialPort arduino;
 
+    private String deliminator = "|";
+
     public ArduinoLights() {
         //initializing everything
         arduino = new SerialPort(9600, Port.kMXP); //Serial port for transmitting data
@@ -30,10 +32,10 @@ public class ArduinoLights implements Runnable {
     }
 
     public synchronized void setLightSequence(LightsEnum selection){
-       sendID(selection.getID());
+       sendID(selection.getID(), selection.getData());
     }
 
-   private void sendID(int id){
-       arduino.writeString(String.valueOf(id));
+   private void sendID(int id, String data){
+       arduino.writeString(String.valueOf(id) + deliminator + data);
    }
 }
