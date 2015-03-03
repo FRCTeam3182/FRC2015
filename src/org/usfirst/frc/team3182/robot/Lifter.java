@@ -57,6 +57,7 @@ public class Lifter implements Runnable {
 
 	
 	public void run(){
+		while (true) {
 		moveLifter(lifterJoystick.getAxis(Joystick.AxisType.kY));
 		controller.enable();
 		controller.setSetpoint(encoders.get(0).get()); //TODO: offset?
@@ -64,6 +65,7 @@ public class Lifter implements Runnable {
 		//m1controller.setSetpoint(lifterJoystick.getAxis(Joystick.AxisType.kY));
 		//m2controller.enable();
 		//m2controller.setSetpoint(lifterJoystick.getAxis(Joystick.AxisType.kY));
+		}
 	}
 
 	/**

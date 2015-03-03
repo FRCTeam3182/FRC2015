@@ -20,16 +20,21 @@ public class UltrasonicSensor implements Runnable{
 
     @Override
     public void run() {
+    	while (true) {
         // Green one is 1V/1024 per centimeter
         // Black one is 1V/1024 per 5 millimeters
 
-        double blackVoltage = sensors.get(0).getVoltage(); // Black one
-        double greenVoltage = sensors.get(1).getVoltage(); // Green one
+        double blackVoltage = sensors.get(0).getValue(); // Black one
+        double greenVoltage = sensors.get(1).getValue(); // Green one
 
-        double blackDistance = (blackVoltage / 1024) / 5;
+        double blackDistance = (blackVoltage * 5) * 0.0393701;
         double greenDistance = (greenVoltage / 1024) / 10;
 
-        SmartDashboard.putNumber("Ultrasonic 1", blackDistance);
-        SmartDashboard.putNumber("Ultrasonic 2", greenDistance);
+        SmartDashboard.putNumber("Ultrasonic 1", blackVoltage);
+        SmartDashboard.putNumber("Ultrasonic 2", greenVoltage);
+        
+        SmartDashboard.putNumber("Ultrasonic 1 Distance", blackDistance);
+        SmartDashboard.putNumber("Ultrasonic 2 Distance", greenDistance);
+    	}
     }
 }
