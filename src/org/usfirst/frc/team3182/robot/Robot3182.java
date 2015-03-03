@@ -44,8 +44,6 @@ public class Robot3182 extends IterativeRobot {
 
         arduinoLightsVar.setLightSequence(LightsEnum.RAINBOW);
 
-
-
     }
 
     /**
