@@ -20,6 +20,7 @@ public class Robot3182 extends IterativeRobot {
 
     private ArduinoLights arduinoLightsVar;
     private static Lifter lifterVar;
+    private static UltrasonicSensor ultrasonicSensorVar;
 
     //Declaring dashboard variable
     public static SendableChooser table = new SendableChooser();
@@ -40,6 +41,9 @@ public class Robot3182 extends IterativeRobot {
         new Thread(arduinoLightsVar, "ArduinoLights").start();
         lifterVar = new Lifter();
         new Thread(lifterVar, "Lifter").start();
+        ultrasonicSensorVar = new UltrasonicSensor();
+        new Thread(ultrasonicSensorVar, "UltraSonic").start();
+
 
 
         arduinoLightsVar.setLightSequence(LightsEnum.RAINBOW);

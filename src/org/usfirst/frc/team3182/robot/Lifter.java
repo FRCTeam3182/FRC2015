@@ -23,8 +23,6 @@ public class Lifter implements Runnable {
 	private ArrayList<Talon> talons = new ArrayList<Talon>();
 	private ArrayList<Encoder> encoders = new ArrayList<Encoder>();
 
-	private ArrayList<Ultrasonic> ultrasonics = new ArrayList<Ultrasonic>();
-
 	private DigitalInput limitSwitch;
 	
 	private PIDController controller;
@@ -41,8 +39,7 @@ public class Lifter implements Runnable {
 		encoders.add(new Encoder(9,10));  //Talon 4
 		encoders.add(new Encoder(11,12)); //Talon 5
 
-		ultrasonics.add(new Ultrasonic(14, 15));
-		ultrasonics.add(new Ultrasonic(16, 17));
+
 
 		limitSwitch = new DigitalInput(13);
 
@@ -96,25 +93,25 @@ public class Lifter implements Runnable {
 	 * Height is in inches (in)
 	 * @param heightIn
 	 */
-//	public void setLifter(int heightIn){
-//		int convertedHeight = heightIn * 2; // TODO Set real conversion rate
-//
-//		if (convertedHeight < 0 || convertedHeight > 100){ // TODO Change the max height
-//			return;
-//		}
-//
-//		while (encoders.get(0).getDistance() != convertedHeight){
-//			if (convertedHeight < 0){
-//				talons.get(0).set(-0.5);
-//		//		talons.get(1).set(0.5);
-//			}
-//			else{
-//				talons.get(0).set(0.5);
-//	//			talons.get(1).set(-0.5);
-//			}
-//
-//		}
-//	}
+	public void setLifter(int heightIn){
+		int convertedHeight = heightIn * 2; // TODO Set real conversion rate
+
+		if (convertedHeight < 0 || convertedHeight > 100){ // TODO Change the max height
+			return;
+		}
+
+		while (encoders.get(0).getDistance() != convertedHeight){
+			if (convertedHeight < 0){
+				talons.get(0).set(-0.5);
+		//		talons.get(1).set(0.5);
+			}
+			else{
+				talons.get(0).set(0.5);
+	//			talons.get(1).set(-0.5);
+			}
+
+		}
+	}
 	
 	/*
 	 * Uses the ultrasonic sensors to drive the robot to line up properly with the totes
