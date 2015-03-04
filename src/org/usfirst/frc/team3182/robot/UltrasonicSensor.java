@@ -16,8 +16,6 @@ public class UltrasonicSensor implements Runnable{
     }
 
 
-
-
     @Override
     public void run() {
     	while (true) {
