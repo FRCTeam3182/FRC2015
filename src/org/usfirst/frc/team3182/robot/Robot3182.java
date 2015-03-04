@@ -35,13 +35,13 @@ public class Robot3182 extends IterativeRobot {
 
         //Initialize the threads
 
-        driveTrainVar = new DriveTrain();
-        new Thread(driveTrainVar, "DriveTrain").start();
         arduinoLightsVar = new ArduinoLights();
         new Thread(arduinoLightsVar, "ArduinoLights").start();
+        driveTrainVar = new DriveTrain();
+        new Thread(driveTrainVar, "DriveTrain").start();
         lifterVar = new Lifter();
         new Thread(lifterVar, "Lifter").start();
-        ultrasonicSensorVar = new UltrasonicSensor();
+        ultrasonicSensorVar = new UltrasonicSensor(arduinoLightsVar);
         new Thread(ultrasonicSensorVar, "UltraSonic").start();
 
 

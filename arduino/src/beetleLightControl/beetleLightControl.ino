@@ -10,8 +10,10 @@
  *
  *
  */
- 
-struct RGB{
+
+#include <Adafruit_NeoPixel.h>
+
+struct RGB {
   byte r;
   byte g;
   byte b;
@@ -19,7 +21,7 @@ struct RGB{
 
 int currentID = -1;
 boolean isTopLit = false;
-RGB topColor = {0,0,0};
+RGB topColor = {0, 0, 0};
 
 void setup() {
   Serial.begin(9600);
@@ -33,10 +35,10 @@ void wait(int wait) {
   int tempMillis = millis();
   while (millis() - tempMillis < wait) {
     if (Serial.available() > 0) { //If something is received
-      if(Serial.
+      if (Serial.
     }
-    else {
-      delay(10);
+  else {
+    delay(10);
     }
   }
 }

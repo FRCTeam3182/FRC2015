@@ -17,8 +17,6 @@ public class Lifter implements Runnable {
 	//declare instances
 
 	private Joystick lifterJoystick;
-	
-
 
 	private ArrayList<Talon> talons = new ArrayList<Talon>();
 	private ArrayList<Encoder> encoders = new ArrayList<Encoder>();
@@ -114,16 +112,16 @@ public class Lifter implements Runnable {
 
 		}
 	}
-	
+
 	/*
 	 * Uses the ultrasonic sensors to drive the robot to line up properly with the totes
 	 */
 	public void getInPosition(){
-		
+
 		//check if the lifter is in the correct place
-		
+
 		//
-	
+
 	}
 
 
