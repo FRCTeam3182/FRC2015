@@ -3,7 +3,7 @@
  *
  * Our official code of complete awesomeness to control the universe. 
  * This year's game: Recycle Rush
- *
+ *#YOLOSWAG!!!!
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package org.usfirst.frc.team3182.robot;
 
@@ -101,6 +101,8 @@ public class Robot3182 extends IterativeRobot {
     @Override
     public void testInit() {
         lifterVar.reset(); // Resets the lifter to the ready position
+        driveTrainVar.testDriveTrain(); //for use while wheels off the ground
+    
     }
 
     public static DriveTrain getDriveTrain() {

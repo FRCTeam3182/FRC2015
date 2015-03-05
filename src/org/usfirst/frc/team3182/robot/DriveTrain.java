@@ -41,7 +41,7 @@ public class DriveTrain implements Runnable {
 
 	
 	// Initialze gyro   
-	private Gyro gyro;
+	// private Gyro gyro;
 	
 	public DriveTrain() {
 
@@ -49,10 +49,11 @@ public class DriveTrain implements Runnable {
 		driverStation = DriverStation.getInstance();
 
 		// Instantiate
-		gyro = new Gyro(new AnalogInput(0));
+		// gyro = new Gyro(new AnalogInput(0));
 
-		// Joystick
+		// Joysticks
 			driveJoystick = new Joystick(0);
+		//	Joystick turnJoystick = new Joystick(0);
 
 
 //        talons.add(new Talon(0));
@@ -78,7 +79,7 @@ public class DriveTrain implements Runnable {
         	if(joystickStateCommand) {
             	xCommand = driveJoystick.getAxis(Joystick.AxisType.kX);
             	yCommand = driveJoystick.getAxis(Joystick.AxisType.kY);
-            	rotationCommand = driveJoystick.getTwist();
+            	rotationCommand = (driveJoystick.getRawButton(7) ? 1 : 0) * -.25 + (driveJoystick.getRawButton(8) ? 1 : 0) * .25;
         	}
             if (driverStation.isEnabled()) {
                 /*=================================================================
@@ -190,6 +191,28 @@ public class DriveTrain implements Runnable {
             SmartDashboard.putNumber("Encoder " + encoders.indexOf(e), e.getRate());
         }
 	}
-
-
+	
+	public void testDriveTrain()
+	{
+		while(true)
+		{
+			moveDriveTrain(0, 0.3, 0, 0);
+			driveToDashboard();
+			double sum = 0;
+			for(Encoder e : encoders)
+			{
+				sum += e.getRate();	
+			}
+			double avg = sum / 4.0;
+			for(Encoder e : encoders)
+			{
+				double percentError = Math.abs(e.getRate() - avg)/avg * 100; 
+				SmartDashboard.putNumber("Encoder "+encoders.indexOf(e) +" Percent Error", percentError);
+			}
+			
+		}
+	}	
+		
 }
+
+
