@@ -1,8 +1,10 @@
 package org.usfirst.frc.team3182.robot.auto;
 
+import org.usfirst.frc.team3182.robot.ArduinoLights;
 import org.usfirst.frc.team3182.robot.DriveTrain;
 import org.usfirst.frc.team3182.robot.Lifter;
 import org.usfirst.frc.team3182.robot.Robot3182;
+import org.usfirst.frc.team3182.robot.lights.LightsEnum;
 
 public class UltimateBeautyPoss implements AutoPossibilityInterface {
 
@@ -35,5 +37,10 @@ public class UltimateBeautyPoss implements AutoPossibilityInterface {
         dt.moveDriveTrainDistance(0, 1); // Move back towards 3 totes
         l.setLifter(9); // Pick up all 3 totes
         dt.moveDriveTrainDistance(0, 10); // Move towards auto zone
+    }
+
+    @Override
+    public void sendLightsCommand(ArduinoLights arduinoLights) {
+        arduinoLights.setLightSequence(LightsEnum.ULTIMATE_POSS);
     }
 }

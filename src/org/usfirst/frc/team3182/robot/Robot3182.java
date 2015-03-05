@@ -77,8 +77,8 @@ public class Robot3182 extends IterativeRobot {
     public void autonomousInit() {
         AutoPossibilityInterface possibility;
         possibility = (AutoPossibilityInterface) table.getSelected();
+        possibility.sendLightsCommand(arduinoLightsVar);
         possibility.executePossibility(lifterVar, driveTrainVar);
-
     }
 
     /**
