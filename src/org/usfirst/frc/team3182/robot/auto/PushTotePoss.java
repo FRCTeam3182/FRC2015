@@ -1,8 +1,10 @@
 package org.usfirst.frc.team3182.robot.auto;
 
+import org.usfirst.frc.team3182.robot.ArduinoLights;
 import org.usfirst.frc.team3182.robot.DriveTrain;
 import org.usfirst.frc.team3182.robot.Lifter;
 import org.usfirst.frc.team3182.robot.Robot3182;
+import org.usfirst.frc.team3182.robot.lights.LightsEnum;
 
 public class PushTotePoss implements AutoPossibilityInterface{
 
@@ -21,5 +23,10 @@ public class PushTotePoss implements AutoPossibilityInterface{
         dt.moveDriveTrainDistance(0, 10);
         l.resetLifter();
 
+    }
+
+    @Override
+    public void sendLightsCommand(ArduinoLights arduinoLights) {
+        arduinoLights.setLightSequence(LightsEnum.PUSH_TOTE_POSS);
     }
 }
