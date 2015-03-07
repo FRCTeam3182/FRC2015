@@ -6,6 +6,8 @@ import org.usfirst.frc.team3182.robot.Lifter;
 import org.usfirst.frc.team3182.robot.Robot3182;
 import org.usfirst.frc.team3182.robot.lights.LightsEnum;
 
+import edu.wpi.first.wpilibj.Timer;
+
 public class DriveForwardPoss implements AutoPossibilityInterface {
 
 
@@ -18,7 +20,9 @@ public class DriveForwardPoss implements AutoPossibilityInterface {
     public void executePossibility(Lifter lifter, DriveTrain driverTrain) {
 
         DriveTrain dt = Robot3182.getDriveTrain();
-        dt.moveDriveTrainDistance(0, 5);
+        dt.moveDriveTrain(0,.6,0);
+        Timer.delay(3);
+        dt.moveDriveTrain(0,0,0);
     }
 
     @Override

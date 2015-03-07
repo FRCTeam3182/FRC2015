@@ -56,9 +56,9 @@ public class Lifter implements Runnable {
 	
 	public void run(){
 		while (true) {
-		moveLifter(lifterJoystick.getAxis(Joystick.AxisType.kY));
-		controller.enable();
-		controller.setSetpoint(encoders.get(0).get()); //TODO: offset?
+		moveLifterRaw(lifterJoystick.getAxis(Joystick.AxisType.kY));
+		//controller.enable();
+		//controller.setSetpoint(encoders.get(0).get()); //TODO: offset?
 		//m1controller.enable();
 		//m1controller.setSetpoint(lifterJoystick.getAxis(Joystick.AxisType.kY));
 		//m2controller.enable();
@@ -83,9 +83,15 @@ public class Lifter implements Runnable {
 	}
 	public void moveLifterRaw(double speed) //also use if you want double PID control
 	{
-		controller.disable();
-		talons.get(0).set(speed);
-		talons.get(1).set(speed * -1); // maybe See which Talon needs to be reversed
+		//controller.disable();
+		if(Math.abs(speed)>.3){
+		talons.get(0).set(speed-.1);
+		talons.get(1).set(speed); // maybe See which Talon needs to be reversed
+		}
+		else{
+		talons.get(0).set(0);
+		talons.get(1).set(0);
+		}
 	}
 
 
@@ -134,7 +140,7 @@ public class Lifter implements Runnable {
 	}
 
 	public synchronized void reset() {
-		resetLifter();
+		//resetLifter();
 	}
 
 }

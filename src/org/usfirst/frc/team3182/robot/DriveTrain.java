@@ -79,7 +79,7 @@ public class DriveTrain implements Runnable {
         	if(joystickStateCommand) {
             	xCommand = driveJoystick.getAxis(Joystick.AxisType.kX);
             	yCommand = driveJoystick.getAxis(Joystick.AxisType.kY);
-            	rotationCommand = (driveJoystick.getRawButton(7) ? 1 : 0) * -.25 + (driveJoystick.getRawButton(8) ? 1 : 0) * .25;
+            	rotationCommand = (driveJoystick.getRawButton(7) ? 1 : 0) * -.4 + (driveJoystick.getRawButton(8) ? 1 : 0) * .4;
         	}
             if (driverStation.isEnabled()) {
                 /*=================================================================
@@ -125,14 +125,21 @@ public class DriveTrain implements Runnable {
                 }
 
 
-                moveDriveTrain(xCommand, yCommand, 0, 0);
+                moveDriveTrain(xCommand, yCommand, rotationCommand, 0);
             }
             driveToDashboard();
-            Timer.delay(.1); //100ms delay
+            Timer.delay(.05); //100ms delay
         }
 	}
 
-
+	public synchronized void setXCommand(double x) {
+		this.xCommand = x;
+	}
+	
+	public synchronized void setYCommand(double y) {
+		this.yCommand = y;
+	}
+	
 	public synchronized void setJoystickStateCommand(boolean joystickStateCommand) {
 		this.joystickStateCommand = joystickStateCommand;
 	}
@@ -211,7 +218,7 @@ public class DriveTrain implements Runnable {
 			}
 			
 		}
-	}	
+	}
 		
 }
 

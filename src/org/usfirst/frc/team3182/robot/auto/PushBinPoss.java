@@ -18,10 +18,10 @@ public class PushBinPoss implements AutoPossibilityInterface
         DriveTrain dt = Robot3182.getDriveTrain();
         Lifter l = Robot3182.getLifter();
         dt.moveDriveTrainDistance(0, 2);
-        l.resetLifter();
+        //l.resetLifter();
         l.setLifter(7); //TODO Change to correct measurements
         dt.moveDriveTrainDistance(0, 10);
-        l.resetLifter();
+        //l.resetLifter();
     }
 
     @Override

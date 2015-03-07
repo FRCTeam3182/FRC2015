@@ -8,8 +8,10 @@
 package org.usfirst.frc.team3182.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team3182.robot.auto.*;
 import org.usfirst.frc.team3182.robot.lights.LightsEnum;
 
@@ -35,18 +37,18 @@ public class Robot3182 extends IterativeRobot {
 
         //Initialize the threads
 
-        arduinoLightsVar = new ArduinoLights();
-        new Thread(arduinoLightsVar, "ArduinoLights").start();
+        //arduinoLightsVar = new ArduinoLights();
+       // new Thread(arduinoLightsVar, "ArduinoLights").start();
         driveTrainVar = new DriveTrain();
         new Thread(driveTrainVar, "DriveTrain").start();
         lifterVar = new Lifter();
         new Thread(lifterVar, "Lifter").start();
-        ultrasonicSensorVar = new UltrasonicSensor(arduinoLightsVar);
-        new Thread(ultrasonicSensorVar, "UltraSonic").start();
+        //ultrasonicSensorVar = new UltrasonicSensor(arduinoLightsVar);
+       // new Thread(ultrasonicSensorVar, "UltraSonic").start();
 
 
 
-        arduinoLightsVar.setLightSequence(LightsEnum.RAINBOW);
+        //arduinoLightsVar.setLightSequence(LightsEnum.RAINBOW);
 
     }
 
@@ -75,12 +77,23 @@ public class Robot3182 extends IterativeRobot {
      */
     @Override
     public void autonomousInit() {
+    	
+        driveTrainVar.setYCommand(-.8);
+        Timer.delay(3);
+        driveTrainVar.setYCommand(0);
+        
+        /*
         AutoPossibilityInterface possibility;
         possibility = (AutoPossibilityInterface) table.getSelected();
         possibility.sendLightsCommand(arduinoLightsVar);
         possibility.executePossibility(lifterVar, driveTrainVar);
+        */
     }
 
+    @Override
+    public void teleopInit() {
+    	driveTrainVar.setJoystickStateCommand(true);
+    }
     /**
      * Called every 10ms while in teleop
      */
