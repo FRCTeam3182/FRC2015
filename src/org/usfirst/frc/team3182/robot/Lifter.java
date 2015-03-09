@@ -85,7 +85,7 @@ public class Lifter implements Runnable {
 	{
 		//controller.disable();
 		if(Math.abs(speed)>.3){
-		talons.get(0).set(speed-.1);
+		talons.get(0).set(speed*.9);
 		talons.get(1).set(speed); // maybe See which Talon needs to be reversed
 		}
 		else{
@@ -141,6 +141,12 @@ public class Lifter implements Runnable {
 
 	public synchronized void reset() {
 		//resetLifter();
+	}
+	public synchronized void moveMotor(int motor, double s){
+		if(Math.abs(s)>.3)talons.get(motor).set(s);
+		else{
+			talons.get(motor).set(0);
+			};
 	}
 
 }

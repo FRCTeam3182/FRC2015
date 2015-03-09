@@ -8,6 +8,7 @@
 package org.usfirst.frc.team3182.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -79,7 +80,7 @@ public class Robot3182 extends IterativeRobot {
     public void autonomousInit() {
     	
         driveTrainVar.setYCommand(-.8);
-        Timer.delay(3);
+        Timer.delay(2.8);
         driveTrainVar.setYCommand(0);
         
         /*
@@ -110,12 +111,21 @@ public class Robot3182 extends IterativeRobot {
 
     /**
      * Called when test mode is activated
-     */
+     
     @Override
     public void testInit() {
         lifterVar.reset(); // Resets the lifter to the ready position
         driveTrainVar.testDriveTrain(); //for use while wheels off the ground
     
+    }
+    */
+    @Override
+    public void testPeriodic() {
+        //lifterVar.reset(); // Resets the lifter to the ready position
+        //driveTrainVar.testDriveTrain(); //for use while wheels off the ground
+    	Joystick j = new Joystick(0);
+    	lifterVar.moveMotor(0, j.getAxis(Joystick.AxisType.kY));
+    	lifterVar.moveMotor(1, j.getAxis(Joystick.AxisType.kX));
     }
 
     public static DriveTrain getDriveTrain() {

@@ -68,10 +68,10 @@ public class DriveTrain implements Runnable {
         drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
         drive.setSafetyEnabled(false);
 
-        encoders.add(new Encoder(1, 2));
-        encoders.add(new Encoder(3, 4));
-        encoders.add(new Encoder(5, 6));
-        encoders.add(new Encoder(7, 8)); // TODO Check all these ports
+        encoders.add(new Encoder(0, 1));
+        encoders.add(new Encoder(2, 3));
+        encoders.add(new Encoder(4, 5));
+        encoders.add(new Encoder(6, 7)); // TODO Check all these ports
 	}
 
 	public void run() {
@@ -79,7 +79,7 @@ public class DriveTrain implements Runnable {
         	if(joystickStateCommand) {
             	xCommand = driveJoystick.getAxis(Joystick.AxisType.kX);
             	yCommand = driveJoystick.getAxis(Joystick.AxisType.kY);
-            	rotationCommand = (driveJoystick.getRawButton(7) ? 1 : 0) * -.4 + (driveJoystick.getRawButton(8) ? 1 : 0) * .4;
+            	rotationCommand = (driveJoystick.getRawButton(7) ? 1 : 0) * -.3 + (driveJoystick.getRawButton(8) ? 1 : 0) * .3;
         	}
             if (driverStation.isEnabled()) {
                 /*=================================================================
@@ -194,9 +194,13 @@ public class DriveTrain implements Runnable {
 		SmartDashboard.putNumber("Smooth Var rotation", rotationSmooth);
 		SmartDashboard.putBoolean("Joystick state", joystickStateCommand);
 
-        for (Encoder e : encoders){
-            SmartDashboard.putNumber("Encoder " + encoders.indexOf(e), e.getRate());
-        }
+        SmartDashboard.putNumber("Encoder (top left)", encoders.get(0).getRate());
+        SmartDashboard.putNumber("Encoder (bottom left)", encoders.get(1).getRate());
+        SmartDashboard.putNumber("Encoder (top right)", encoders.get(2).getRate());
+        SmartDashboard.putNumber("Encoder (bottom right)", encoders.get(3).getRate());
+        
+        
+
 	}
 	
 	public void testDriveTrain()
