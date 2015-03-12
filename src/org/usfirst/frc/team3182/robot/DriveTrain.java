@@ -39,28 +39,16 @@ public class DriveTrain implements Runnable {
 	private final double rotationP = 10; // dead zone for the joystick's rotation (in degrees)
     
 
-	
-	// Initialze gyro   
-	// private Gyro gyro;
-	
 	public DriveTrain() {
 
 		// Initializing everything
 		driverStation = DriverStation.getInstance();
 
 		// Instantiate
-		// gyro = new Gyro(new AnalogInput(0));
 
 		// Joysticks
 			driveJoystick = new Joystick(0);
 		//	Joystick turnJoystick = new Joystick(0);
-
-
-//        talons.add(new Talon(0));
-//        talons.add(new Talon(1));
-//        talons.add(new Talon(2));
-//        talons.add(new Talon(3));
-
 
 
         drive = new RobotDrive(0, 1, 2, 3);
@@ -71,7 +59,7 @@ public class DriveTrain implements Runnable {
         encoders.add(new Encoder(0, 1));
         encoders.add(new Encoder(2, 3));
         encoders.add(new Encoder(4, 5));
-        encoders.add(new Encoder(6, 7)); // TODO Check all these ports
+        encoders.add(new Encoder(6, 7)); 
 	}
 
 	public void run() {
@@ -153,38 +141,6 @@ public class DriveTrain implements Runnable {
         drive.mecanumDrive_Cartesian(x, y, rotation, gyro);
     }
 
-    public void moveDriveTrainDistance(double distX, double distY)
-    {
-        //Moves the robot in an arbitrary distance unit, determined by the encoder's output
-        //double oldDistance = 0.00;
-        distX = distX * 1;
-        distY = distY * 1; // TODO Change to correct values
-        double xyRatio = distX/(distY+distX);
-        double yxRatio = distY/(distY+distX);
-        double totDistance = Math.sqrt(distX * distX + distY * distY); //pythagorean theorem
-        double encoderXTotDist = 0;
-        double encoderYTotDist = 0;
-        for(Encoder e : encoders) {
-            e.reset();
-        }
-        moveDriveTrain(xyRatio, yxRatio, 0, 0);
-        do
-        {
-            encoderXTotDist -= encoders.get(0).getDistance() / 4;
-            encoderXTotDist += encoders.get(2).getDistance() / 4;
-            encoderXTotDist += encoders.get(1).getDistance() / 4;
-            encoderXTotDist -= encoders.get(3).getDistance() / 4;
-            encoderYTotDist += encoders.get(0).getDistance() / 4;
-            encoderYTotDist += encoders.get(2).getDistance() / 4;
-            encoderYTotDist += encoders.get(1).getDistance() / 4;
-            encoderYTotDist += encoders.get(3).getDistance() / 4;
-
-        }while(Math.sqrt(Math.pow(encoderXTotDist, 2) + Math.pow(encoderYTotDist, 2)) < totDistance);
-
-        moveDriveTrain(0, 0, 0, 0);
-    }
-
-
 	private void driveToDashboard() {
 		SmartDashboard.putNumber("Raw x Axis", xCommand);
 		SmartDashboard.putNumber("Raw y Axis", yCommand);
@@ -197,10 +153,7 @@ public class DriveTrain implements Runnable {
         SmartDashboard.putNumber("Encoder (top left)", encoders.get(0).getRate());
         SmartDashboard.putNumber("Encoder (bottom left)", encoders.get(1).getRate());
         SmartDashboard.putNumber("Encoder (top right)", encoders.get(2).getRate());
-        SmartDashboard.putNumber("Encoder (bottom right)", encoders.get(3).getRate());
-        
-        
-
+        SmartDashboard.putNumber("Encoder (bottom right)", encoders.get(3).getRate());       
 	}
 	
 	public void testDriveTrain()
