@@ -18,4 +18,8 @@ public class MotorTest {
         LifterThread lifterThreadVar = new LifterThread(lifterJoystick);
         new Thread(lifterThreadVar, "LifterTest").start();
     }
+
+    public void killThreads(){
+
+    }
 }

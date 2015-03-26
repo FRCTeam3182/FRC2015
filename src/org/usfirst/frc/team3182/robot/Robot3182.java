@@ -22,6 +22,9 @@ public class Robot3182 extends IterativeRobot {
 
     //Declaring dashboard variable
     public static SendableChooser table = new SendableChooser();
+
+    // The variable for testing individual motors
+    private MotorTest test;
     
    
 
@@ -77,6 +80,8 @@ public class Robot3182 extends IterativeRobot {
     public void disabledInit()
     {
     	driveTrainVar.setJoystickStateCommand(false);
+
+        test.killThreads();
     }
 
 
@@ -85,7 +90,8 @@ public class Robot3182 extends IterativeRobot {
      */
     @Override
     public void testInit() {
-        MotorTest test = new MotorTest(driveTrainVar.getJoystick(), lifterVar.getJoystick());
+
+        test = new MotorTest(driveTrainVar.getJoystick(), lifterVar.getJoystick());
         test.initiateTest();
     }
 
