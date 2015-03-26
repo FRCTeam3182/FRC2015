@@ -176,7 +176,10 @@ public class DriveTrain implements Runnable {
 			
 		}
 	}
-		
+
+    public Joystick getJoystick() {
+        return driveJoystick;
+    }
 }
 
 

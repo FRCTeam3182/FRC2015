@@ -8,13 +8,9 @@
 package org.usfirst.frc.team3182.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team3182.robot.auto.*;
-import org.usfirst.frc.team3182.robot.lights.LightsEnum;
+import org.usfirst.frc.team3182.robot.test.motorTest.MotorTest;
 
 public class Robot3182 extends IterativeRobot {
 
@@ -83,21 +79,16 @@ public class Robot3182 extends IterativeRobot {
     	driveTrainVar.setJoystickStateCommand(false);
     }
 
+
     /**
-     * Called when test mode is activated
-     
+     * Called when test mode is enabled
+     */
     @Override
     public void testInit() {
-        lifterVar.reset(); // Resets the lifter to the ready position
-        driveTrainVar.testDriveTrain(); //for use while wheels off the ground
-    
+        MotorTest test = new MotorTest(driveTrainVar.getJoystick(), lifterVar.getJoystick());
+        test.initiateTest();
     }
-    */
-    @Override
-    public void testPeriodic() {
-    	Joystick j = new Joystick(0);
-    	lifterVar.move(j.getAxis(Joystick.AxisType.kY));
-    }
+
 
     public static DriveTrain getDriveTrain() {
         return driveTrainVar;
@@ -110,4 +101,6 @@ public class Robot3182 extends IterativeRobot {
     public ArduinoLights getArduinoLights() {
         return arduinoLightsVar;
     }
+
+
 }
