@@ -3,16 +3,23 @@
  *
  * Our official code of complete awesomeness to control the universe. 
  * This year's game: Recycle Rush
- *
+ *#YOLOSWAG!!!!
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package org.usfirst.frc.team3182.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+<<<<<<< HEAD
 import org.usfirst.frc.team3182.robot.auto.*;
 import org.usfirst.frc.team3182.robot.lights.LightsEnum;
+=======
+>>>>>>> origin/master
 
+import org.usfirst.frc.team3182.robot.auto.*;
+import org.usfirst.frc.team3182.robot.lights.LightsEnum;
 
 public class Robot3182 extends IterativeRobot {
 
@@ -24,24 +31,35 @@ public class Robot3182 extends IterativeRobot {
 
     //Declaring dashboard variable
     public static SendableChooser table = new SendableChooser();
+    
+   
 
     /**
      * Called once when the robot is turned on
      */
     public void robotInit() {
-        listOfPossibilities();
-
+        
         //Initialize the threads
 
+        //arduinoLightsVar = new ArduinoLights();
+       // new Thread(arduinoLightsVar, "ArduinoLights").start();
         driveTrainVar = new DriveTrain();
         new Thread(driveTrainVar, "DriveTrain").start();
+<<<<<<< HEAD
         arduinoLightsVar = new ArduinoLights();
         new Thread(arduinoLightsVar, "ArduinoLights").start();
+=======
+>>>>>>> origin/master
         lifterVar = new Lifter();
         new Thread(lifterVar, "Lifter").start();
 
 
+<<<<<<< HEAD
         arduinoLightsVar.setLightSequence(LightsEnum.RANDOM);
+=======
+
+        //arduinoLightsVar.setLightSequence(LightsEnum.RAINBOW);
+>>>>>>> origin/master
 
     }
 
@@ -49,33 +67,22 @@ public class Robot3182 extends IterativeRobot {
      * This adds all the possibility classes to the array list
      * and builds the SmartDashboard dropdown
      */
-    public static void listOfPossibilities(){
-        DriveForwardPoss driveForwardPoss = new DriveForwardPoss();
-        table.addDefault(driveForwardPoss.getName(), driveForwardPoss);
-
-        PushTotePoss pushTotePoss = new PushTotePoss();
-        table.addObject(pushTotePoss.getName(), pushTotePoss);
-
-        PushBinPoss pushBinPoss = new PushBinPoss();
-        table.addObject(pushBinPoss.getName(), pushBinPoss);
-
-        UltimateBeautyPoss ultimateBeautyPoss = new UltimateBeautyPoss();
-        table.addObject(ultimateBeautyPoss.getName(), ultimateBeautyPoss);
-
-        SmartDashboard.putData("Autonomous Mode Chooser", table);
-    }
 
     /**
      * Called once when autonomous is triggered
      */
     @Override
     public void autonomousInit() {
-        AutoPossibilityInterface possibility;
-        possibility = (AutoPossibilityInterface) table.getSelected();
-        possibility.executePossibility(lifterVar, driveTrainVar);
-
+    	
+        driveTrainVar.setYCommand(-.8);
+        Timer.delay(2.8);
+        driveTrainVar.setYCommand(0);
     }
 
+    @Override
+    public void teleopInit() {
+    	driveTrainVar.setJoystickStateCommand(true);
+    }
     /**
      * Called every 10ms while in teleop
      */
@@ -83,13 +90,27 @@ public class Robot3182 extends IterativeRobot {
     public void teleopPeriodic() {
         
     }
+    
+    @Override
+    public void disabledInit()
+    {
+    	driveTrainVar.setJoystickStateCommand(false);
+    }
 
     /**
      * Called when test mode is activated
-     */
+     
     @Override
     public void testInit() {
         lifterVar.reset(); // Resets the lifter to the ready position
+        driveTrainVar.testDriveTrain(); //for use while wheels off the ground
+    
+    }
+    */
+    @Override
+    public void testPeriodic() {
+    	Joystick j = new Joystick(0);
+    	lifterVar.move(j.getAxis(Joystick.AxisType.kY));
     }
 
     public static DriveTrain getDriveTrain() {
