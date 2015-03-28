@@ -80,5 +80,8 @@ public class Lifter implements Runnable {
 		resetLifter();
 	}
 
+	public Joystick getJoystick() {
+		return lifterJoystick;
+	}
 }
 
